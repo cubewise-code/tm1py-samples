@@ -1,8 +1,9 @@
 """
 Read FX data from FRED (Federal Reserve of St. Louis data) through pandas and push it to the fx cube
 
+Run sample setup.py before running this script, to create the required cubes and dimensions!
+
 Assumption: 
-- FX Cube exists with 4 Dimensions: From Currency , To Currency, Date , Type
 - pandas is installed
 
 """
@@ -30,6 +31,6 @@ for tmstp, data in data.iterrows():
     cellset[coordinates] = value
 
 with TM1Service(address="", port="8001", user="admin", password="apple", ssl=True) as tm1:
-    tm1.data.write_values('FX Rates', cellset)
+    tm1.data.write_values('TM1py FX Rates', cellset)
 
 

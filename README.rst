@@ -9,10 +9,10 @@ TM1py-samples has heaps of cool stuff that you can do with TM1py:
 - clean your TM1 models through regular expressions
 - generate MDX Queries from existing cube views
 - Analyse Processing Feeders time
-- Maintain dimensions and subsets through python
+- Maintain dimensions and subsets with python
 - ...
 
-It's are a great starting point to get up to speed with TM1py.
+It's a great starting point to get up to speed with TM1py.
 
 
 Requirements
@@ -76,7 +76,7 @@ In order to be able to communicate with TM1 through HTTP, you have to assign an 
 
 The parameter will only be effective after restarting the TM1 instance.
 
-For more information on how to enable the TM1 REST API, check out the following article:
+For a more detailed tutorial on how to enable the TM1 REST API, check out the following article:
 
 https://code.cubewise.com/blog/enabling-the-tm1-rest-api
 
@@ -129,14 +129,11 @@ This is not recommended though, as it doesn't take care of the dependencies!
 
 Now that TM1py is set up successfully, you can download the TM1py samples manually from Github.
 
-
 To download the samples just go to https://github.com/cubewise-code/TM1py-samples
 
 Then click on Clone or download
 
-.. image:: Images/cloneOrDownload.png
-
-then click on "Download ZIP"
+Then click on "Download ZIP"
 
 .. image:: Images/downloadZIP.png
 
@@ -238,6 +235,7 @@ Issues
 
 If you find issues, sign up in Github and open an Issue in this repository
 
-Issues
+Contribution
 =======================
+
 If you wrote cool sample scripts with TM1py, that might be useful for others, feel free to push them to the repository
