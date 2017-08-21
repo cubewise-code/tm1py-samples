@@ -12,7 +12,7 @@ TM1py-samples has heaps of cool stuff that you can do with TM1py:
 - Maintain dimensions and subsets through python
 - ...
 
-It's a really good starting point before writing your own TM1 python scripts.
+It's are a great starting point to get up to speed with TM1py.
 
 
 Requirements
@@ -29,7 +29,10 @@ Step by Step Installation
 
 The TM1py samples will run on all Python versions >= 3.5.
 
-First, check if you have python installed. open the command-line and type: python --version
+First, we need to check if you have python installed. Open the command-line and type: python --version.
+
+To open the command-line, press the windows button on the keyboard. Then type 'cmd'. Then press enter.
+
 
 .. image:: Images/cmdPythonVersion.png
 
@@ -106,7 +109,7 @@ To install TM1py, simply type: pip install TM1py
 
 .. image:: Images/cmdPip.png
 
-into the command-line. pip (the Python package management system) will download the TM1py package and its requirements from PyPI and store it at in the third party module folder ..Python\\Lib\\site-packages\\TM1py
+into the command-line. pip (the Python package management system) will download the TM1py package and its requirements from PyPI and store it at the third party module folder ..Python\\Lib\\site-packages\\TM1py
 
 If Python is installed correctly it should work without issues. Otherwise type:
 
@@ -124,8 +127,8 @@ This is not recommended though, as it doesn't take care of the dependencies!
 5. Download TM1py-samples from Github
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Now that TM1py is set up successfully. You can download the TM1py samples manually from Github.
-They are a great starting point to get up to speed with TM1py.
+Now that TM1py is set up successfully, you can download the TM1py samples manually from Github.
+
 
 To download the samples just go to https://github.com/cubewise-code/TM1py-samples
 
@@ -152,7 +155,7 @@ The script will ask you for:
 
 - user      (Name of the TM1 User)
 - password  (The user's password. The command-line reads your input silently)
-- port      (As HTTPPortNumber as specified in the TM1s.cfg)
+- port      (The HTTPPortNumber as specified in the TM1s.cfg)
 - address   (Address of the TM1 instance. 'localhost' or '' if you run the TM1 instance locally)
 - ssl       (True or False, as stated in the TM1s.cfg)
 
@@ -193,7 +196,7 @@ Find all unused dimensions with TM1py
        # Ask TM1 to return the names of all existing dimensions
        all_cubes = tm1.cubes.get_all()
        # Now find all dimensions that are actually being used in cubes
-       # Create a set (in Python: a list of unique elements)
+       # Create a Set (in Python: a list of unique elements)
        used_dimensions = set()
        # Populate the set: iterate Ithrough the list of cubes and push each cube's dimensions into the set
        for cube in all_cubes:
