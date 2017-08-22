@@ -1,11 +1,10 @@
 """
 Read a csv file with ~ 1000000 lines and write the data to a cube
-Takes 1 or 2 minutes.
+Takes about 24 seconds.
 
 """
 
 from TM1py.Services import TM1Service
-
 
 # Build cellset from file
 cube = ''

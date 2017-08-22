@@ -16,8 +16,6 @@ from TM1py.Services import TM1Service
 
 raw_data = quandl.get("FRED/GDP")
 
-print(raw_data)
-
 # create cellset and push it to Econ Cube
 cellset = {}
 for tmstp, row_data in raw_data.iterrows():
