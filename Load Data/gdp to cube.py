@@ -26,8 +26,8 @@ for tmstp, row_data in raw_data.iterrows():
     value = row_data.values[0]
     cellset[coordinates] = value
 
-with TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True) as tm1:
-    tm1.data.write_values('TM1py Econ', cellset)
+with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+    tm1.cubes.cells.write_values('TM1py Econ', cellset)
 
 
 

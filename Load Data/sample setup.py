@@ -3,6 +3,9 @@ Create all cubes and dimensions thar are required for the Load Data Samples:
 - fx rates to cube
 - gdp to cube
 - stock prices to cube
+
+IMPORTANT: Will not work TM1 11 due to bug in TM1
+https://www.ibm.com/developerworks/community/forums/html/topic?id=75f2b99e-6961-4c71-9364-1d5e1e083eff&ps=25
 """
 
 from TM1py.Objects import Cube, Dimension, Hierarchy, Element
@@ -18,7 +21,7 @@ def daterange(start_date, end_date):
 
 
 # push data to TM1
-with TM1Service(address="", port="8001", user="admin", password="apple", ssl=True) as tm1:
+with TM1Service(address="", port=12354, user="admin", password="apple", ssl=True) as tm1:
     # create stuff for fx rates sample
     currencies = ('EUR', 'JPY', 'CHF', 'USD', 'AUD')
     elements = [Element(e, 'Numeric') for e in currencies]

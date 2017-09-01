@@ -23,5 +23,5 @@ with open("plan_BudgetPlan.csv", "r") as file:
     cube = server_and_cube.split(":")[1][0:-1]
 
 # Push cellset to TM1
-with TM1Service(address="localhost", port=8001, user="admin", password="apple", ssl=True) as tm1:
-    tm1.data.write_values(cube, cellset)
+with TM1Service(address="localhost", port=12354, user="admin", password="apple", ssl=True) as tm1:
+    tm1.cubes.cells.write_values(cube, cellset)

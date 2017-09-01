@@ -187,7 +187,7 @@ Find all unused dimensions with TM1py
     # - user: The TM1 user
     # - password: Password of the user
     # - ssl: True or False, as stated in the TM1s.cfg
-    with TM1Service(address='', port=8001, user='admin', password='apple', ssl=True) as tm1:
+    with TM1Service(address='', port=12354, user='admin', password='apple', ssl=True) as tm1:
        # Ask TM1 to return the names of all existing dimensions
        all_dimensions = tm1.dimensions.get_all_names()
        # Ask TM1 to return the names of all existing dimensions

@@ -4,12 +4,12 @@ Read FX data from FRED (Federal Reserve of St. Louis data) through pandas and pu
 Run sample setup.py before running this script, to create the required cubes and dimensions!
 
 Assumption: 
-- pandas is installed
+- pandas and pandas_datareader is installed
 
 """
 import collections
 from datetime import datetime
-# type 'pip install pandas' into cmd if you don't have pandas installed
+# type 'pip install pandas_datareader' into cmd if you don't have pandas_datareader installed
 import pandas_datareader.data as web
 
 from TM1py.Services import TM1Service
@@ -21,7 +21,7 @@ raw_data = web.get_data_fred("DEXJPUS", start)
 # remove NaN
 data = raw_data.dropna()
 
-# create cellset and push to FX Cube
+# create cellset and push it to FX Cube
 cube = 'FX Rates'
 cellset = collections.OrderedDict()
 for tmstp, data in data.iterrows():
@@ -30,7 +30,7 @@ for tmstp, data in data.iterrows():
     coordinates = ('USD', 'JPY', str(date), 'Spot')
     cellset[coordinates] = value
 
-with TM1Service(address="", port="8001", user="admin", password="apple", ssl=True) as tm1:
-    tm1.data.write_values('TM1py FX Rates', cellset)
+with TM1Service(address="", port=12354, user="admin", password="apple", ssl=True) as tm1:
+    tm1.cubes.cells.write_values('TM1py FX Rates', cellset)
 
 

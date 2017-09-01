@@ -5,7 +5,7 @@ Run loose statements of TI
 
 from TM1py.Services import TM1Service
 
-with TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
     ti_statements = [
         "DimensionCreate ( 'TM1py' );",
         "DimensionElementInsert ( 'TM1py' , '' , 'tm1' , 'N');",

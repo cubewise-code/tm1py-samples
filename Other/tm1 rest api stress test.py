@@ -26,12 +26,12 @@ def get_all_process_names(tm1):
 
 def read_pnl(tm1):
     for i in range(1000):
-        data = tm1.data.get_view_content('Plan_BudgetPlan', 'High Level Profit and Loss', private=False)
+        data = tm1.cubes.cells.get_view_content('Plan_BudgetPlan', 'High Level Profit and Loss', private=False)
 
 # fire requests asynchronously
 async def main():
     loop = asyncio.get_event_loop()
-    with TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True) as tm1:
+    with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
 
         future1 = loop.run_in_executor(None, get_product_version, tm1)
         future2 = loop.run_in_executor(None, get_server_name, tm1)

@@ -6,7 +6,7 @@ from TM1py.Objects import Process
 from TM1py.Services import TM1Service
 
 # connection to TM1 Server
-with TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
     process_name = 'TM1py process'
 
     # create new Process in python
