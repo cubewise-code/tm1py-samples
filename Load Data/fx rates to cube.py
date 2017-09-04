@@ -1,10 +1,13 @@
 """
 Read FX data from FRED (Federal Reserve of St. Louis data) through pandas and push it to the fx cube
 
-Run sample setup.py before running this script, to create the required cubes and dimensions!
-
-Assumption: 
-- pandas and pandas_datareader is installed
+Prerequisites:
+1. Create the required cubes and dimensions
+    Run TM1py sample Load Data\setup.py
+2. Install pandas
+    type 'pip install pandas' into cmd if you don't have pandas installed
+3. Add pandas_reader module:
+    To install it, run in command line: pip install pandas_reader
 
 """
 import collections
