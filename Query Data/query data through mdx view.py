@@ -10,7 +10,7 @@ from TM1py.Objects import MDXView
 from TM1py.Services import TM1Service
 
 
-with TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
     # Random text
     random_string = str(uuid.uuid4())
 
@@ -22,10 +22,10 @@ with TM1Service(address='localhost', port=8001, user='admin', password='apple', 
     mdx_view = MDXView(cube_name='}ClientGroups', view_name='TM1py_' + random_string, MDX=mdx)
 
     # Create mdx view on TM1 Server
-    tm1.views.create(view=mdx_view)
+    tm1.cubes.views.create(view=mdx_view)
 
     # Get view content
-    content = tm1.data.get_view_content(cube_name=mdx_view.cube, view_name=mdx_view.name)
+    content = tm1.cubes.cells.get_view_content(cube_name=mdx_view.cube, view_name=mdx_view.name)
 
     # Print content
     print(content)

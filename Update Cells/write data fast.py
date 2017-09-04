@@ -23,7 +23,7 @@ mdx_template = "SELECT " \
 
 # Create Dimensions and Cube, if it doesnt already exist
 def create_dimensions_and_cube():
-    with TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True) as tm1:
+    with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
         # Build Measure Dimension
         element = Element('Numeric Element', 'Numeric')
         hierarchy1 = Hierarchy('Python Cube Measure', 'Python Cube Measure', [element])
@@ -46,14 +46,14 @@ def create_dimensions_and_cube():
 # Function to be called in parallel
 def write_values(tm1, mdx, values):
     print('start with mdx: {}'.format(mdx))
-    tm1.data.write_values_through_cellset(mdx=mdx, values=values)
+    tm1.cubes.cells.write_values_through_cellset(mdx=mdx, values=values)
     print('Done with mdx: {}'.format(mdx))
 
 
 # Now fire requests asynchronously
 async def main():
     loop = asyncio.get_event_loop()
-    with TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True) as tm1:
+    with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
         with ThreadPoolExecutor(max_workers=10) as executor:
             futures = [loop.run_in_executor(executor, write_values, tm1,
                                             mdx_template.format(0, 9999), range(0, 9999)),

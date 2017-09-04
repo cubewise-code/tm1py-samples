@@ -1,5 +1,5 @@
 """ 
-- Create a cell annotation at a certain location.
+- Create a cell annotation at a fix location in a cube.
 - Get all annotations from a cube. 
 - Delete the annotation that was created
 
@@ -11,7 +11,7 @@ from TM1py.Services import TM1Service
 from TM1py.Objects import Annotation
 
 # connection to TM1 Server
-tm1 = TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True)
+tm1 = TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True)
 
 # just a random text
 random_string = str(uuid.uuid4())
@@ -23,12 +23,12 @@ a = Annotation(comment_value=random_string,
                                     'Jan-2005'])
 
 # create annotation on TM1 Server
-tm1.annotations.create(a)
+tm1.cubes.annotations.create(a)
 
 # find the created annotation and delete it
-for annotation in tm1.annotations.get_all('plan_BudgetPlan'):
+for annotation in tm1.cubes.annotations.get_all('plan_BudgetPlan'):
     if annotation.comment_value == random_string:
-        tm1.annotations.delete(annotation_id=annotation.id)
+        tm1.cubes.annotations.delete(annotation_id=annotation.id)
 
 # logout
 tm1.logout()

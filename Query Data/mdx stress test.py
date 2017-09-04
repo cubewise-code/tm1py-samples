@@ -1,5 +1,5 @@
 """
-Do MDX Queries asynchronously.
+Do MDX Queries asynchronously. 
 """
 
 import asyncio
@@ -17,12 +17,12 @@ mdx5 = "SELECT {[plan_version].MEMBERS}*{[plan_chart_of_accounts].Members} * {[p
 # Define function
 def execute_mdx(tm1, mdx):
     for i in range(10):
-        tm1.data.execute_mdx(mdx)
+        tm1.cubes.cells.execute_mdx(mdx)
 
 # Fire requests asynchronously
 async def main():
     loop = asyncio.get_event_loop()
-    with TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True) as tm1:
+    with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
 
         future1 = loop.run_in_executor(None, execute_mdx, tm1, mdx1)
         future2 = loop.run_in_executor(None, execute_mdx, tm1, mdx2)

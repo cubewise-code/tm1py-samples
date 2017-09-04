@@ -8,7 +8,7 @@ from TM1py.Services import TM1Service
 
 
 # Connect to TM1
-with TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
     cubes = tm1.cubes.get_all()
 
     # cubes with SKIPCHECK

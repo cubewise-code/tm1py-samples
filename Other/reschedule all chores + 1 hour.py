@@ -6,7 +6,7 @@ Chores get deactivated implicitly before update (and activate after transaction 
 from TM1py.Services import TM1Service
 
 
-with TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
     # Get all chores. Loop through them and update them
     for chore in tm1.chores.get_all():
         chore.reschedule(hours=-1)

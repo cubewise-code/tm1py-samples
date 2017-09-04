@@ -11,14 +11,14 @@ from TM1py.Services import TM1Service
 # Connection Parameters
 tm1_source_parameters = {
     "address": "localhost",
-    "port": "8001",
+    "port": "12354",
     "user": "admin",
     "password": "apple",
     "ssl": True
 }
 tm1_target_parameters = {
     "address": "localhost",
-    "port": "9121",
+    "port": "9123",
     "user": "admin",
     "password": "apple",
     "ssl": True

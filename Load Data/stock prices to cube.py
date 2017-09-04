@@ -25,6 +25,6 @@ for tmstp, row in data.iterrows():
         cellset[('IBM', str(date), measure)] = row[measure]
 
 # push data to TM1
-with TM1Service(address="", port="8001", user="admin", password="apple", ssl=True) as tm1:
-    tm1.data.write_values(cube, cellset)
+with TM1Service(address="", port="12354", user="admin", password="apple", ssl=True) as tm1:
+    tm1.cubes.cells.write_values(cube, cellset)
 

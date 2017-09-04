@@ -27,12 +27,12 @@ def run_process(tm1, region):
 async def main():
     loop = asyncio.get_event_loop()
     # Connect to TM1
-    with TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True) as tm1:
+    with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
         # Fire of different process executions though 'run_process' function.
         futures = [loop.run_in_executor(None, run_process, tm1, 'pRegion ' + regions[num])
                    for num
                    in range(1, 10)]
-        # Await the execution
+        # Await the executions
         for future in futures:
             await future
 

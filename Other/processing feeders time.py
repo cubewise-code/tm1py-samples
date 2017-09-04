@@ -20,7 +20,7 @@ def get_time_from_tm1_timestamp(tm1_timestamp):
     return datetime.combine(date(year, month, day), time(hour, minute, second))
 
 # Connect to TM1
-with TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
     for cube in tm1.cubes.get_all():
         if cube.has_rules and cube.rules.has_feeders:
             ti = 'CubeProcessFeeders(\'{}\');'.format(cube.name)
@@ -31,12 +31,12 @@ with TM1Service(address='localhost', port=8001, user='admin', password='apple', 
             t.sleep(1)
 
             # Get logs
-            logs = tm1.server.get_last_message_log_entries(reverse=True, top=10)
+            logs = tm1.server.get_last_message_log_entries(reverse=True, top=100)
 
             # Filter logs
             filtered_logs = (entry for entry
                              in logs
-                             if entry['Logger'] == 'TM1.Server' and 'TM1CubeImpl::ProcessFeeders:' in entry['Message']
+                             if entry['Logger'] == 'TM1.Server' and 'TM1CubeImpl::ProcessFeeders' in entry['Message']
                              and cube.name in entry['Message'])
 
             # Get start time and end time

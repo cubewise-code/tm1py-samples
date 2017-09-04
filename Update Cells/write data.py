@@ -5,7 +5,7 @@ Write data to TM1
 
 from TM1py.Services import TM1Service
 
-with TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
     # cellset to store the new data
     cellset = {}
     # Populate cellset with coordinates and value pairs
@@ -15,4 +15,4 @@ with TM1Service(address='localhost', port=8001, user='admin', password='apple', 
     cellset[('FY 2004 Budget', 'UK', 'Finance', 'Utilities', 'local', 'input', 'Jul-2005')] = 2141
     cellset[('FY 2004 Budget', 'UK', 'Finance', 'Utilities', 'local', 'input', 'Aug-2005')] = 2621
     # send the cellset to TM1
-    tm1.data.write_values('Plan_BudgetPlan', cellset)
+    tm1.cubes.cells.write_values('Plan_BudgetPlan', cellset)

@@ -6,21 +6,27 @@ http://pandas.pydata.org/
 """
 
 
-import pandas as pd
-
 from TM1py.Services import TM1Service
-from TM1py import Utils
+from TM1py.Utils import Utils
 
 
-with TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True) as tm1:
-    # Get data from P&L cube
-    pnl_data = tm1.data.get_view_content(cube_name='Plan_BudgetPlan',
-                                         view_name='Budget Input Detailed',
-                                         cell_properties=['Ordinal', 'Value'],
-                                         private=False)
+with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+    # define MDX Query
+    mdx = "SELECT {[plan_time].[Jan-2004]:[plan_time].[Dec-2004]} * {[plan_chart_of_accounts].[Revenue]," \
+                  "[plan_chart_of_accounts].[COS], [plan_chart_of_accounts].[Operating Expense], " \
+                  "[plan_chart_of_accounts].[Net Operating Income]} on ROWS, "\
+                  "{[plan_version].[FY 2004 Budget]} on COLUMNS  " \
+            "FROM [plan_BudgetPlan] " \
+            "WHERE ([plan_business_unit].[10110],[plan_department].[410], "\
+                  "[plan_exchange_rates].[local],[plan_source].[input]) "
+
+    # Get data from P&L cube through MDX
+    pnl_data = tm1.cubes.cells.execute_mdx(mdx)
 
     # Build pandas DataFrame fram raw cellset data
     df = Utils.build_pandas_dataframe_from_cellset(pnl_data)
+
+    print(df)
 
     # Calculate Std over Accounts
     print(df.groupby(level=3).std())

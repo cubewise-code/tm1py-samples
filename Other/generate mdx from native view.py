@@ -6,10 +6,10 @@ from TM1py.Services import TM1Service
 
 
 # Establish connection to TM1 Server
-with TM1Service(address='localhost', port=8001, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
 
     # Instantiate TM1py.NativeView object
-    nv = tm1.views.get_native_view('Plan_BudgetPlan', 'High Level Profit And Loss', private=False)
+    nv = tm1.cubes.views.get_native_view('Plan_BudgetPlan', 'High Level Profit And Loss', private=False)
 
     # Retrieve MDX from native view. Print it
     print(nv.MDX)
