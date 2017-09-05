@@ -3,8 +3,11 @@ Read IBM Stock data from Wiki through quandl and push it to the Stock cube
 
 Run sample setup.py before running this script, to create the required cubes and dimensions!
 
-Assumption: 
-- quandl is installed
+Prerequisites:
+1. Create the required cubes and dimensions
+    Run TM1py sample Load Data\setup.py
+2. Install quandl
+    type 'pip install quandl' into cmd if you don't have quandl installed
 
 """
 
