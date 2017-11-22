@@ -1,9 +1,8 @@
 """
 Remove all objects in TM1 that match a list of regular expressions.
 
-user with care! Very powerful!
+use with care!
 """
-
 
 
 import re
