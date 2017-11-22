@@ -58,6 +58,7 @@ with TM1Service(address="", port=12354, user="admin", password="apple", ssl=True
         tm1.dimensions.create(dimension)
 
     # create dimension TM1py Year
+    elements = [Element(str(year), 'Numeric') for year in range(1990, 2041, 1)]
     hierarchy = Hierarchy('TM1py Year', 'TM1py Year', elements)
     dimension = Dimension('TM1py Year', [hierarchy])
     if not tm1.dimensions.exists(dimension.name):
