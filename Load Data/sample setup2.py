@@ -4,9 +4,12 @@ Create all cubes and dimensions thar are required for the Load Data Samples:
 - gdp to cube
 - stock prices to cube
 
+<<<<<<< HEAD
 TM1 version supported: TM1 10.2 FP5, FP6, FP7
 IMPORTANT: Will currently not work TM1 11 (PA 2.0.3) due to bug in TM1 (PA 2)
 https://www.ibm.com/developerworks/community/forums/html/topic?id=75f2b99e-6961-4c71-9364-1d5e1e083eff&ps=25
+=======
+>>>>>>> 16ccf1b84e826835f7a6cd52dee138de69ba1eb6
 """
 
 from TM1py.Objects import Cube, Dimension, Hierarchy, Element
