@@ -1,7 +1,7 @@
 """
 Remove all Views and Subsets in TM1 that match a list of regular expressions.
 
-user with care! Very powerful!
+use with care!
 """
 
 
