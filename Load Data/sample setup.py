@@ -4,6 +4,12 @@ Create all cubes and dimensions thar are required for the Load Data Samples:
 - gdp to cube
 - stock prices to cube
 
+<<<<<<< HEAD
+TM1 version supported: TM1 10.2 FP5, FP6, FP7
+IMPORTANT: Will currently not work TM1 11 (PA 2.0.3) due to bug in TM1 (PA 2)
+https://www.ibm.com/developerworks/community/forums/html/topic?id=75f2b99e-6961-4c71-9364-1d5e1e083eff&ps=25
+=======
+>>>>>>> 16ccf1b84e826835f7a6cd52dee138de69ba1eb6
 """
 
 from TM1py.Objects import Cube, Dimension, Hierarchy, Element
@@ -23,8 +29,8 @@ with TM1Service(address="", port=12354, user="admin", password="apple", ssl=True
 
     # ============================
     # create TM1 objects for fx rates sample
-    currencies = ('EUR', 'JPY', 'CHF', 'USD', 'AUD')
-    elements = [Element(e, 'Numeric') for e in currencies]
+    currencies = ('RMB', 'EUR', 'JPY', 'CHF', 'USD', 'AUD', 'TWD', 'HKD', 'GBP', 'SGD', 'INR')
+    elements = [Element(cur, 'Numeric') for cur in currencies]
 
     # create dimension TM1py Currency From
     hierarchy = Hierarchy('TM1py Currency From', 'TM1py Currency From', elements)
@@ -39,7 +45,7 @@ with TM1Service(address="", port=12354, user="admin", password="apple", ssl=True
         tm1.dimensions.create(dimension)
 
     # create dimension TM1py Date
-    start_date = date(1940, 1, 1)
+    start_date = date(1990, 1, 1)
     end_date = date(2041, 1, 1)
     elements = [Element(str(single_date), 'Numeric') for single_date in daterange(start_date, end_date)]
     hierarchy = Hierarchy('TM1py Date', 'TM1py Date', elements)
@@ -47,8 +53,23 @@ with TM1Service(address="", port=12354, user="admin", password="apple", ssl=True
     if not tm1.dimensions.exists(dimension.name):
         tm1.dimensions.create(dimension)
 
+    # create dimension TM1py Month
+    elements = [Element(str(month), 'Numeric') for month in range(1, 13)]
+    hierarchy = Hierarchy('TM1py Month', 'TM1py Month', elements)
+    dimension = Dimension('TM1py Month', [hierarchy])
+    if not tm1.dimensions.exists(dimension.name):
+        tm1.dimensions.create(dimension)
+
+    # create dimension TM1py Year
+    elements = [Element(str(year), 'Numeric') for year in range(1990, 2041, 1)]
+    hierarchy = Hierarchy('TM1py Year', 'TM1py Year', elements)
+    dimension = Dimension('TM1py Year', [hierarchy])
+    if not tm1.dimensions.exists(dimension.name):
+        tm1.dimensions.create(dimension)
+
     # create dimension TM1py FX Rates Measure
-    elements = [Element('Spot', 'Numeric')]
+    elements = [Element('Spot', 'Numeric'), Element('EOP', 'Numeric'),
+                Element('AVG', 'Numeric'), Element('Month Close', 'Numeric')]
     hierarchy = Hierarchy('TM1py FX Rates Measure', 'TM1py FX Rates Measure', elements)
     dimension = Dimension('TM1py FX Rates Measure', [hierarchy])
     if not tm1.dimensions.exists(dimension.name):
@@ -56,6 +77,12 @@ with TM1Service(address="", port=12354, user="admin", password="apple", ssl=True
 
     # create cube TM1py FX Rates
     cube = Cube('TM1py FX Rates', ['TM1py Currency From', 'TM1py Currency To', 'TM1py Date', 'TM1py FX Rates Measure'])
+    if not tm1.cubes.exists(cube.name):
+        tm1.cubes.create(cube)
+
+    # create cube TM1py FX Rates Monthly
+    cube = Cube('TM1py FX Rates Monthly', ['TM1py Currency From', 'TM1py Currency To', 'TM1py Year', 'TM1py Month',
+                                           'TM1py FX Rates Measure'])
     if not tm1.cubes.exists(cube.name):
         tm1.cubes.create(cube)
 
@@ -67,13 +94,6 @@ with TM1Service(address="", port=12354, user="admin", password="apple", ssl=True
     elements = [Element(country, 'Numeric') for country in countries]
     hierarchy = Hierarchy('TM1py Country', 'TM1py Country', elements)
     dimension = Dimension('TM1py Country', [hierarchy])
-    if not tm1.dimensions.exists(dimension.name):
-        tm1.dimensions.create(dimension)
-
-    # create dimension TM1py Year
-    elements = [Element(str(year), 'Numeric') for year in range(1940, 2041, 1)]
-    hierarchy = Hierarchy('TM1py Year', 'TM1py Year', elements)
-    dimension = Dimension('TM1py Year', [hierarchy])
     if not tm1.dimensions.exists(dimension.name):
         tm1.dimensions.create(dimension)
 

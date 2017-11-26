@@ -25,7 +25,7 @@ raw_data = web.get_data_fred("DEXJPUS", start)
 data = raw_data.dropna()
 
 # create cellset and push it to FX Cube
-cube = 'FX Rates'
+cube = 'TM1py FX Rates'
 cellset = collections.OrderedDict()
 for tmstp, data in data.iterrows():
     date = tmstp.date()
@@ -34,6 +34,6 @@ for tmstp, data in data.iterrows():
     cellset[coordinates] = value
 
 with TM1Service(address="", port=12354, user="admin", password="apple", ssl=True) as tm1:
-    tm1.cubes.cells.write_values('TM1py FX Rates', cellset)
+    tm1.cubes.cells.write_values(cube, cellset)
 
 
