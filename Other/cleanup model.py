@@ -31,16 +31,14 @@ with TM1Service(address='localhost', port=12354, user='admin', password='apple',
                     if re.match(regex, view.name, re.IGNORECASE):
                         tm1.cubes.views.delete(cube_name=cube, view_name=view.name, private=False)
 
+    # Get Dimension names. Filter out }ElementAttributes and }Hierarchies Dimensions
+    dimensions = [dimension for dimension in tm1.dimensions.get_all_names()
+                  if not dimension.startswith('}ElementAttributes_') and not dimension.startswith('}Hierarchies_')]
     # Iterate through dimensions
-    dimensions = tm1.dimensions.get_all_names()
     for dimension in dimensions:
         for regex in regex_list:
             if re.match(regex, dimension, re.IGNORECASE):
                 tm1.dimensions.delete(dimension)
-                # TM1 deletes the Element Attributes dimension independently, so we remove it from our list
-                element_attributes_dimension = '}}ElementAttributes_{}'.format(dimension)
-                if element_attributes_dimension in dimensions:
-                    dimensions.remove(element_attributes_dimension)
                 break
             else:
                 # Iterate through public subsets
