@@ -31,7 +31,7 @@ with TM1Service(address='localhost', port=12354, user='admin', password='apple',
             t.sleep(1)
 
             # Get logs
-            logs = tm1.server.get_last_message_log_entries(reverse=True, top=100)
+            logs = tm1.server.get_message_log_entries(reverse=True, top=100)
 
             # Filter logs
             filtered_logs = (entry for entry
