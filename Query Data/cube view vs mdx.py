@@ -25,7 +25,7 @@ with TM1Service(address='localhost', port=12354, user='admin', password='apple',
     # Query data through CubeView
     for i in range(20):
         start_time = time.time()
-        a = tm1.cubes.cells.get_view_content(cube_name, view_name, private=False)
+        a = tm1.cubes.cells.execute_view(cube_name, view_name, private=False)
         run_time = time.time() - start_time
         runtimes_view.append(run_time)
 

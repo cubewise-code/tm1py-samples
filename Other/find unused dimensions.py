@@ -18,3 +18,4 @@ with TM1Service(address='localhost', port=12354, user='admin', password='apple',
     unused_dimensions = set(all_dimensions) - used_dimensions
 
     print(unused_dimensions)
+

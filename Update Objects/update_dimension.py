@@ -20,13 +20,15 @@ with TM1Service(address='localhost', port=12354, user='admin', password='apple',
     h = dimension.hierarchies[0]
 
     # create new random element name
-    element_name = str(uuid.uuid4())
+    parent = str(uuid.uuid4())
+    child = str(uuid.uuid4())
 
-    # add element to hierarchy
-    h.add_element(element_name=element_name, element_type='Numeric')
+    # add elements to hierarchy
+    h.add_element(element_name=parent, element_type='Numeric')
+    h.add_element(element_name=child, element_type='Numeric')
 
     # add edge to hierarchy
-    h.add_edge('TM1py elem', element_name, 1000)
+    h.add_edge(parent, child, 1000)
 
     # write Hierarchy back to TM1
     tm1.dimensions.update(dimension)
