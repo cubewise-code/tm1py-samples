@@ -12,9 +12,10 @@ def get_server_name(tm1):
     for i in range(1000):
         data = tm1.server.get_server_name()
 
-def get_product_version(tm1):
+def execute_mdx(tm1):
+    mdx = "SELECT { [}Clients].Members } ON ROWS, { [}Groups].Members } ON COLUMNS FROM [}ClientGroups]"
     for i in range(1000):
-        data = tm1.server.get_product_version()
+        data = tm1.cubes.cells.execute_mdx(mdx)
 
 def get_all_dimension_names(tm1):
     for i in range(1000):
@@ -26,14 +27,14 @@ def get_all_process_names(tm1):
 
 def read_pnl(tm1):
     for i in range(1000):
-        data = tm1.cubes.cells.get_view_content('Plan_BudgetPlan', 'High Level Profit and Loss', private=False)
+        data = tm1.cubes.cells.execute_view('Plan_BudgetPlan', 'High Level Profit and Loss', private=False)
 
 # fire requests asynchronously
 async def main():
     loop = asyncio.get_event_loop()
     with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
 
-        future1 = loop.run_in_executor(None, get_product_version, tm1)
+        future1 = loop.run_in_executor(None, execute_mdx, tm1)
         future2 = loop.run_in_executor(None, get_server_name, tm1)
         future3 = loop.run_in_executor(None, read_pnl, tm1)
         future4 = loop.run_in_executor(None, get_all_dimension_names, tm1)

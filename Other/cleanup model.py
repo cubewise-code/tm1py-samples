@@ -48,6 +48,13 @@ with TM1Service(address='localhost', port=12354, user='admin', password='apple',
                     if re.match(regex, subset, re.IGNORECASE):
                         tm1.dimensions.subsets.delete(dimension_name=dimension_name, subset_name=subset, private=False)
 
+    # Iterate through Chores
+    chores = tm1.chores.get_all_names()
+    for chore in chores:
+        for regex in regex_list:
+            if re.match(regex, chore, re.IGNORECASE):
+                tm1.chores.delete(chore)
+
     # Iterate through Processes
     processes = tm1.processes.get_all_names()
     for process in processes:

@@ -28,12 +28,6 @@ with TM1Service(address='localhost', port=12354, user='admin', password='apple',
 
     print(df)
 
-    # Calculate Std over Accounts
-    print(df.groupby(level=3).std())
-
-    # Calculate Mean over Accounts
-    print(df.groupby(level=3).mean())
-
-    # Calculate Median over Accounts
-    print(df.groupby(level=3).median())
+    # Calculate Statistical measures for dataframe
+    print(df.describe())
 

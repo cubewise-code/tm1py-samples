@@ -17,7 +17,7 @@ with TM1Service(address='localhost', port=12354, user='admin', password='apple',
         for dimension_name in cube.dimensions:
             response = tm1._tm1_rest.GET('/api/v1/Dimensions(\'{}\')/Hierarchies(\'{}\')/Elements/$count'
                                          .format(dimension_name, dimension_name))
-            number = json.loads(response)
+            number = int(response.text)
             cube.numberCells *= number
         cubes_with_cellnumber.append(cube)
     # Sort the cube list with a lambda expr.

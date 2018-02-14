@@ -1,10 +1,3 @@
-"""
-Create a dimension with Elements, Edges and ElementAttributes
-
-IMPORTANT: Will not work TM1 11 due to bug in TM1
-https://www.ibm.com/developerworks/community/forums/html/topic?id=75f2b99e-6961-4c71-9364-1d5e1e083eff&ps=25
-"""
-
 from TM1py.Objects import Dimension, Element, ElementAttribute, Hierarchy
 from TM1py.Services import TM1Service
 
