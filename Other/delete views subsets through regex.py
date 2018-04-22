@@ -1,16 +1,16 @@
 """
 Remove all Views and Subsets in TM1 that match a list of regular expressions.
-
 use with care!
 """
-
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 import re
 
 from TM1py.Services import TM1Service
 
-
-with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
     # regular expression for everything that starts with 'temp_' or 'test_'
     regex_list = ['^temp_.*', '^test_.*']
 

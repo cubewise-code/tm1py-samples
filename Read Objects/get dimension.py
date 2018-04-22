@@ -1,14 +1,16 @@
 """
 Get a random dimension from the TM1 mode and print out its details
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 import random
 
 from TM1py.Services import TM1Service
 
-
 # Connection to TM1. Needs Address, Port, Credentials, and SSL
-with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
 
     # get random dimension from the model
     dimension_names = tm1.dimensions.get_all_names()

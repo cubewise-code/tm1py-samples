@@ -1,11 +1,14 @@
 """ 
 Get a Process from TM1. Update it. Push it back to TM1.
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 from TM1py.Services import TM1Service
 
 # connection to TM1 Server
-with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
     # read process
     p = tm1.processes.get('TM1py process')
 

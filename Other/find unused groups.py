@@ -1,12 +1,13 @@
 """
 Find all security groups, that are not used
 """
-
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 from TM1py.Services import TM1Service
 
-
-with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
     # Get all groups
     all_groups = tm1.security.get_all_groups()
 

@@ -1,32 +1,20 @@
+
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
+
 import time
 
 from TM1py import TM1Service
 
-# TM1 Connection Parameters
-source = {
-    "address": '10.77.19.60',
-    "port": 12354,
-    "user": 'admin',
-    "password": 'apple',
-    "ssl": True,
-    "cube": 'c1',
-}
-
-target = {
-    "address": '10.77.19.60',
-    "port": 9699,
-    "user": 'admin',
-    "password": 'apple',
-    "ssl": False,
-    "cube": 'c1',
-}
-
+cube_source = "Retail"
+cube_target = "Retail"
 
 # Establish connection to TM1 Source
-with TM1Service(**source) as tm1_source:
+with TM1Service(**config['tm1srv01']) as tm1_source:
 
     # Start Change Tracking
-    tm1_source.server.initialize_transaction_log_delta_requests("Cube eq '" + source["cube"] + "'")
+    tm1_source.server.initialize_transaction_log_delta_requests("Cube eq '" + cube_source + "'")
 
     # Continuous checks
     def job():
@@ -35,8 +23,8 @@ with TM1Service(**source) as tm1_source:
             cellset = dict()
             for entry in entries:
                 cellset[tuple(entry["Tuple"])] = entry["NewValue"]
-            with TM1Service(**target) as tm1_target:
-                tm1_target.cubes.cells.write_values(target["cube"], cellset)
+            with TM1Service(**config['tm1srv02']) as tm1_target:
+                tm1_target.cubes.cells.write_values(cube_target, cellset)
 
 
     while True:

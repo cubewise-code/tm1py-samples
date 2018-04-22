@@ -1,8 +1,11 @@
 """
 Read a csv file with ~ 1000000 lines and write the data to a cube
 Takes about 24 seconds.
-
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
+
 import time
 
 from TM1py.Services import TM1Service
@@ -24,7 +27,7 @@ with open("plan_BudgetPlan.csv", "r") as file:
     cube = server_and_cube.split(":")[1][0:-1]
 
 # Push cellset to TM1
-with TM1Service(address="localhost", port=12354, user="admin", password="apple", ssl=True) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
     start = time.time()
     tm1.cubes.cells.write_values(cube, cellset)
     end = time.time()

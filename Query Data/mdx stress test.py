@@ -1,6 +1,9 @@
 """
 Do MDX Queries asynchronously. 
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 import asyncio
 
@@ -22,7 +25,7 @@ def execute_mdx(tm1, mdx):
 # Fire requests asynchronously
 async def main():
     loop = asyncio.get_event_loop()
-    with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+    with TM1Service(**config['tm1srv01']) as tm1:
 
         future1 = loop.run_in_executor(None, execute_mdx, tm1, mdx1)
         future2 = loop.run_in_executor(None, execute_mdx, tm1, mdx2)
