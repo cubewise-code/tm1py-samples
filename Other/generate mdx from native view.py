@@ -12,7 +12,7 @@ cube = 'General Ledger'
 view = 'P&L'
 
 # Establish connection to TM1 Server
-with TM1Service(**config['source']) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
 
     # Instantiate TM1py.NativeView object
     nv = tm1.cubes.views.get_native_view(cube, view, private=False)
