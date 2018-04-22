@@ -1,12 +1,15 @@
 """
-regenerate feeders for all cubes. Read the time it took from the MessageLog and print it out
+Regenerate feeders for all cubes.
+Read the time it took from the MessageLog and print it out
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 import time as t
 from datetime import date, time, datetime
 
 from TM1py.Services import TM1Service
-
 
 # Time magic with python
 def get_time_from_tm1_timestamp(tm1_timestamp):
@@ -20,7 +23,7 @@ def get_time_from_tm1_timestamp(tm1_timestamp):
     return datetime.combine(date(year, month, day), time(hour, minute, second))
 
 # Connect to TM1
-with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
     for cube in tm1.cubes.get_all():
         if cube.has_rules and cube.rules.has_feeders:
             ti = 'CubeProcessFeeders(\'{}\');'.format(cube.name)
