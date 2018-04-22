@@ -4,15 +4,18 @@ Measure time to see which way is faster.
 
 Assumption: Cube 'Plan_BudgetPlan' has a view called 'PerformanceTest'
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 import time
 
 from TM1py.Services import TM1Service
 
-with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
 
-    cube_name = 'Plan_BudgetPlan'
-    view_name = 'PerformanceTest'
+    cube_name = 'General Ledger'
+    view_name = 'Default'
 
     # Extract MDX from CubeView
     mdx = tm1.cubes.views.get_native_view(cube_name, view_name, private=False).MDX
