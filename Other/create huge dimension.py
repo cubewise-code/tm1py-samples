@@ -1,9 +1,16 @@
+"""
+Create a new dimension TM1py Big dimension with 100,000 elements
+"""
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
+
 from TM1py.Services import TM1Service
 from TM1py.Objects import Dimension, Hierarchy, Element
 from TM1py.Utils import Utils
 
 # Establish connection to TM1 Server
-with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(**config['source']) as tm1:
     # Create Elements, Edges and stuff in python
     elements = [Element('Element {}'.format(i), 'Numeric') for i in range(1, 100001)]
     elements.append(Element('Even', 'Consolidated'))
