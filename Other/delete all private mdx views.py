@@ -11,7 +11,7 @@ from TM1py.Services import TM1Service
 
 cube = "Retail"
 
-with TM1Service(**config['source']) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
     private_views, public_views = tm1.cubes.views.get_all(cube)
     for v in private_views:
         if isinstance(v, MDXView):

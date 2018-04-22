@@ -9,7 +9,7 @@ from TM1py.Services import TM1Service
 
 
 # Connect to TM1
-with TM1Service(**config['source']) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
     cubes = tm1.cubes.get_all()
 
     # cubes with SKIPCHECK

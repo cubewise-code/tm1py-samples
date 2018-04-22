@@ -10,7 +10,7 @@ from TM1py.Objects import Dimension, Hierarchy, Element
 from TM1py.Utils import Utils
 
 # Establish connection to TM1 Server
-with TM1Service(**config['source']) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
     # Create Elements, Edges and stuff in python
     elements = [Element('Element {}'.format(i), 'Numeric') for i in range(1, 100001)]
     elements.append(Element('Even', 'Consolidated'))
