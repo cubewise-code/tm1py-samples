@@ -2,6 +2,9 @@
 Run Processes in parallel.
 Requires Python 3.5 or greater
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 import asyncio
 
@@ -27,7 +30,7 @@ def run_process(tm1, region):
 async def main():
     loop = asyncio.get_event_loop()
     # Connect to TM1
-    with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+    with TM1Service(**config['tm1srv01']) as tm1:
         # Fire of different process executions though 'run_process' function.
         futures = [loop.run_in_executor(None, run_process, tm1, 'pRegion ' + regions[num])
                    for num
