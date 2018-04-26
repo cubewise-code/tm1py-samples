@@ -1,9 +1,17 @@
+"""
+Get all TM1 transactions for all cubes starting to a specific date.
+"""
+
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
+
 from datetime import datetime
 
 from TM1py.Services import TM1Service
 
 
-with TM1Service(address='10.77.19.60', port=12354, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
 
     # Timestamp for Message-Log parsing
     timestamp = datetime(year=2018, month=2, day=15, hour=16, minute=2, second=0)

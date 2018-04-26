@@ -8,9 +8,10 @@ Prerequisites:
     Run TM1py sample Load Data\setup.py
 2. Install quandl
     type 'pip install quandl' into cmd if you don't have quandl installed
-
 """
-
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 # type 'pip install quandl' into cmd if you don't have quandl installed
 import quandl
 from TM1py.Services import TM1Service
@@ -28,6 +29,6 @@ for tmstp, row in data.iterrows():
         cellset[('IBM', str(date), measure)] = row[measure]
 
 # push data to TM1
-with TM1Service(address="", port="12354", user="admin", password="apple", ssl=True) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
     tm1.cubes.cells.write_values(cube, cellset)
 

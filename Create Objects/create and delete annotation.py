@@ -2,8 +2,10 @@
 - Create a cell annotation at a fix location in a cube.
 - Get all annotations from a cube. 
 - Delete the annotation that was created
-
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 import uuid
 
@@ -11,7 +13,7 @@ from TM1py.Services import TM1Service
 from TM1py.Objects import Annotation
 
 # connection to TM1 Server
-tm1 = TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True)
+tm1 = TM1Service(**config['tm1srv01'])
 
 # just a random text
 random_string = str(uuid.uuid4())

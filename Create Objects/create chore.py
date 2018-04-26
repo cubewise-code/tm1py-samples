@@ -3,6 +3,9 @@ Create a Chore.
 
 Assumption: Process 'import actuals' exists in TM1 model and has a parameter 'pRegion'
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 import uuid
 from datetime import datetime
@@ -13,7 +16,7 @@ from TM1py.Objects import ChoreTask
 from TM1py.Services import TM1Service
 
 # connection to TM1 Server
-with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
     now = datetime.now()
     frequency = ChoreFrequency(days='7', hours='9', minutes='2', seconds='45')
     tasks = [ChoreTask(0, 'import_actuals', parameters=[{'Name': 'pRegion', 'Value': 'UK'}])]

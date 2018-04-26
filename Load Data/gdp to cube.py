@@ -7,12 +7,14 @@ Assumption:
 - quandl is installed
 
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 # type 'pip install quandl' into cmd if you don't have quandl installed
 import quandl
 import math
 from TM1py.Services import TM1Service
-
 
 raw_data = quandl.get("FRED/GDP")
 
@@ -26,7 +28,7 @@ for tmstp, row_data in raw_data.iterrows():
     value = row_data.values[0]
     cellset[coordinates] = value
 
-with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
     tm1.cubes.cells.write_values('TM1py Econ', cellset)
 
 

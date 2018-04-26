@@ -1,9 +1,14 @@
 """
 Do REST API operations in parallel. Can be handy when troubleshooting REST API bugs.
 """
-
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 import asyncio
+
+cube = "General Ledger"
+view = "Default"
 
 from TM1py.Services import TM1Service
 
@@ -27,12 +32,12 @@ def get_all_process_names(tm1):
 
 def read_pnl(tm1):
     for i in range(1000):
-        data = tm1.cubes.cells.execute_view('Plan_BudgetPlan', 'High Level Profit and Loss', private=False)
+        data = tm1.cubes.cells.execute_view(cube, view, private=False)
 
 # fire requests asynchronously
 async def main():
     loop = asyncio.get_event_loop()
-    with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+    with TM1Service(**config['tm1srv01']) as tm1:
 
         future1 = loop.run_in_executor(None, execute_mdx, tm1)
         future2 = loop.run_in_executor(None, get_server_name, tm1)

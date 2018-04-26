@@ -6,20 +6,14 @@ Create all cubes and dimensions thar are required for the Load Data Samples:
 
 
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 from TM1py.Objects import Cube, Dimension, Hierarchy, Element
 from TM1py.Services import TM1Service
 
 from datetime import timedelta, date
-
-
-# TM1 Connection Parameters
-address = 'localhost'
-port = 12354
-user = 'admin'
-password = 'apple'
-ssl = True
-
 
 # Time magic with python generator
 def daterange(start_date, end_date):
@@ -28,7 +22,7 @@ def daterange(start_date, end_date):
 
 
 # push data to TM1
-with TM1Service(address=address, port=port, user=user, password=password, ssl=ssl) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
 
     # ============================
     # create TM1 objects for fx rates sample

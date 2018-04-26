@@ -5,6 +5,9 @@ Script creates cube and dimensions by default if they don't exist yet.
 Play around with the number of working threads to find the optimal setup for your system!
 
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 import asyncio
 import time
@@ -23,7 +26,7 @@ mdx_template = "SELECT " \
 
 # Create Dimensions and Cube, if it doesnt already exist
 def create_dimensions_and_cube():
-    with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+    with TM1Service(**config['tm1srv01']) as tm1:
         # Build Measure Dimension
         element = Element('Numeric Element', 'Numeric')
         hierarchy1 = Hierarchy('Python Cube Measure', 'Python Cube Measure', [element])

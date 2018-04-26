@@ -10,20 +10,15 @@ Prerequisites:
     To install it, run in command line: pip install pandas_datareader
 
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 from datetime import datetime
 # type 'pip install pandas_datareader' into cmd if you don't have pandas_datareader installed
 import pandas_datareader.data as web
 
 from TM1py.Services import TM1Service
-
-
-# Connection parameters
-address = "localhost"
-port = 12354
-user = "admin"
-password = "apple"
-ssl = True
 
 # FX Cube Name
 cube_name = 'TM1py FX Rates'
@@ -65,7 +60,7 @@ for currency_ticker, currency_details in currency_pairs.items():
         coordinates = (currency_details["From"], currency_details["To"], str(date), 'Spot')
         cellset[coordinates] = value
 
-with TM1Service(address=address, port=port, user=user, password=password, ssl=ssl) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
     tm1.cubes.cells.write_values(cube_name, cellset)
 
 

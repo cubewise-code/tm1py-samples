@@ -8,6 +8,9 @@ Prerequisites:
 3. Add pandas_reader module:
     To install it, run in command line: pip install pandas_datareader
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 import collections
 from datetime import datetime
@@ -16,12 +19,6 @@ import pandas_datareader.data as web
 
 from TM1py.Services import TM1Service
 
-# TM1 Parameters
-address = 'localhost'
-port = 12354
-user = 'admin'
-password = 'apple'
-ssl = True
 cube_name = 'TM1py FX Rates Monthly'
 currency_pairs = {
             'EXUSAL': {'From': 'USD', 'To': 'AUD', 'Invert': 'N'},
@@ -60,5 +57,5 @@ for currency_ticker, currency_details in currency_pairs.items():
             value = data.values[0]
         coordinates = (currency_details["From"], currency_details["To"], my_year, my_month, 'Month Close')
         cellset[coordinates] = value
-    with TM1Service(address=address, port=port, user=user, password=password, ssl=ssl) as tm1:
+    with TM1Service(**config['tm1srv01']) as tm1:
         tm1.cubes.cells.write_values(cube_name, cellset)

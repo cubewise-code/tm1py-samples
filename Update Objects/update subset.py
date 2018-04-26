@@ -4,6 +4,9 @@
 - Push it back to TM1
 - Delete it
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 import uuid
 
@@ -11,7 +14,7 @@ from TM1py.Objects import Subset
 from TM1py.Services import TM1Service
 
 
-with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
 
     # get a random string that we can use a subset name
     subset_name = str(uuid.uuid4())

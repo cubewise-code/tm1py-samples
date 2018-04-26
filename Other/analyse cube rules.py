@@ -1,14 +1,15 @@
 """
 Read rules from all cubes and sort cubes by some metrics (Number rows, Number feeders,... )
-
 """
-
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 from TM1py.Services import TM1Service
 
 
 # Connect to TM1
-with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
     cubes = tm1.cubes.get_all()
 
     # cubes with SKIPCHECK

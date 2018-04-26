@@ -1,7 +1,13 @@
+"""
+Create a new file out.xlsx from a TM1 application file.
+"""
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
+
 from TM1py import TM1Service
 
-
-with TM1Service(address='localhost', port=8892, user='admin', password='apple', ssl=True, logging=True) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
     # path in TM1 Application-Tree
     path = 'Finance/P&L.xlsx'
 

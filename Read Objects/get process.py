@@ -1,11 +1,14 @@
 """
 Query a Process from the TM1 model
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 from TM1py.Services import TM1Service
 
 # connection to TM1 Server
-with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
+with TM1Service(**config['tm1srv01']) as tm1:
     # read Process
     p = tm1.processes.get('TM1py process')
 

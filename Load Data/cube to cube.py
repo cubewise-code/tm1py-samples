@@ -5,29 +5,15 @@ then copy it to Cube 'Plan_BudgetPlan' on Instance B.
 Assumption: Metadata (Cube and Dimensions) are in sync.
 
 """
+import configparser
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 from TM1py.Services import TM1Service
 
-# Connection Parameters
-tm1_source_parameters = {
-    "address": "localhost",
-    "port": "12354",
-    "user": "admin",
-    "password": "apple",
-    "ssl": True
-}
-tm1_target_parameters = {
-    "address": "localhost",
-    "port": "9123",
-    "user": "admin",
-    "password": "apple",
-    "ssl": True
-}
-
 # Setup Connections
-tm1_source = TM1Service(**tm1_source_parameters)
-tm1_target = TM1Service(**tm1_target_parameters)
-
+tm1_source = TM1Service(**config['tm1srv01'])
+tm1_target = TM1Service(**config['tm1srv02'])
 
 # Query data from source TM1 model through MDX
 mdx = "SELECT " \
