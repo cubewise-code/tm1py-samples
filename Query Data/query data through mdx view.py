@@ -28,7 +28,7 @@ with TM1Service(**config['tm1srv01']) as tm1:
     tm1.cubes.views.create(view=mdx_view)
 
     # Get view content
-    content = tm1.cubes.cells.get_view_content(cube_name=mdx_view.cube, view_name=mdx_view.name)
+    content = tm1.cubes.cells.execute_view(cube_name=mdx_view.cube, view_name=mdx_view.name)
 
     # Print content
     print(content)
