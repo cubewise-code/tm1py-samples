@@ -3,8 +3,8 @@ import configparser
 config = configparser.ConfigParser()
 config.read('..\config.ini')
 
-import time
 
+import time
 from TM1py import TM1Service
 
 cube_source = "Retail"
