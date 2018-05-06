@@ -1,8 +1,6 @@
 """
 Get a dimension. Update it and push it back to TM1.
 
-IMPORTANT: Will not work TM1 11 due to bug in TM1
-https://www.ibm.com/developerworks/community/forums/html/topic?id=75f2b99e-6961-4c71-9364-1d5e1e083eff&ps=25
 """
 import configparser
 config = configparser.ConfigParser()
