@@ -47,9 +47,9 @@ with TM1Service(**config['tm1srv01']) as tm1:
         cellset_id = tm1.cubes.cells.create_cellset(query)
         try:
 
-            for format in ['raw', 'default', 'values', 'csv', 'dataframe', 'array', 'dygraph']:
-                result = tm1.cubes.cells.extract_cellset(cellset_id, format=format )
-                print("{} output format".format(format))
+            for output_format in ['raw', 'default', 'values', 'csv', 'dataframe', 'array', 'dygraph']:
+                result = tm1.cubes.cells.extract_cellset(cellset_id, result_format=output_format, value_precision=2)
+                print("{} output format".format(output_format))
                 pp.pprint( list(result) if inspect.isgenerator(result) else result )
                 print()
 
