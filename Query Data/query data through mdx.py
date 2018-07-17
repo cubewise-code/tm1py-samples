@@ -20,7 +20,7 @@ with TM1Service(**config['tm1srv01']) as tm1:
     content = tm1.cubes.cells.execute_mdx(mdx)
 
     # Print content
-    print(content)
+    print(dict(content))
 
 
 
