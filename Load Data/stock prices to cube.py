@@ -1,5 +1,5 @@
 """
-Read IBM Stock data from Wiki through quandl and push it to the Stock cube
+Read IBM Stock data from Wiki through quandl and push it to the Stock data cube
 
 Run sample setup.py before running this script, to create the required cubes and dimensions!
 
