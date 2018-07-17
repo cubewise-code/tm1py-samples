@@ -3,3 +3,4 @@
 *.iml
 .idea/vcs.xml
 tmp.py
+config.ini
