@@ -10,7 +10,7 @@ from TM1py.Utils import Utils
 
 # Read Config
 config = configparser.ConfigParser()
-config.read('./config.ini')
+config.read('../config.ini')
 
 # Initializer Prettyprinter
 pp = pprint.PrettyPrinter(indent=2)
@@ -36,7 +36,7 @@ with TM1Service(**config['tm1srv01']) as tm1:
             cell_properties=cell_properties,
             elem_properties=elem_properties,
             member_properties=member_properties,
-            top=None)
+            top=top)
         pp.pprint(raw_data)
 
         # default: (Case and space insensitive) dictionary
@@ -81,8 +81,6 @@ with TM1Service(**config['tm1srv01']) as tm1:
             elem_properties=elem_properties,
             member_properties=member_properties)
         pp.pprint(dygraph)
-
-
 
     # Sample query from TM1 sample server called "Planning Sample"
     mdx = """
@@ -143,7 +141,7 @@ with TM1Service(**config['tm1srv01']) as tm1:
 
     query_formats(
             mdx=mdx,
-            cell_properties=["Value","FormattedValue","RuleDerived"],
-            elem_properties=None,#["Name","Type","Index"],
-            member_properties=["Name"],#,"UniqueName","Attributes"],
+            cell_properties=["Value", "FormattedValue", "RuleDerived"],
+            elem_properties=None,  # ["Name","Type","Index"],
+            member_properties=["Name"],  # ,"UniqueName","Attributes"],
             top=None)
