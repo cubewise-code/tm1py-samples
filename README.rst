@@ -1,7 +1,7 @@
-TM1py-samples
-=======================
+.. image:: https://s3-ap-southeast-2.amazonaws.com/downloads.cubewise.com/web_assets/CubewiseLogos/Final+logos_Samples.png
+    :align: center
 
-TM1py-samples has heaps of cool stuff that you can do with TM1py:
+TM1py Samples has heaps of cool stuff that you can do with TM1py:
 
 - load TM1 data into pandas for statistical analysis
 - load FX, Stock and GDP data from external sources into your cubes
