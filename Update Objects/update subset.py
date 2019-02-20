@@ -1,21 +1,19 @@
-""" 
+"""
 - Create a subset
 - Query and manipulate it
 - Push it back to TM1
 - Delete it
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
-
 import uuid
 
 from TM1py.Objects import Subset
 from TM1py.Services import TM1Service
 
+config = configparser.ConfigParser()
+config.read('..\config.ini')
 
 with TM1Service(**config['tm1srv01']) as tm1:
-
     # get a random string that we can use a subset name
     subset_name = str(uuid.uuid4())
 
@@ -37,4 +35,3 @@ with TM1Service(**config['tm1srv01']) as tm1:
 
     # delete it
     tm1.dimensions.subsets.delete(dimension_name='Plan_Department', subset_name=subset_name, private=True)
-
