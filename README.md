@@ -8,15 +8,15 @@ TM1py Samples is a great starting point to get up to speed with TM1py. It contai
 - synchronize cubes from different TM1 instances
 - clean your TM1 models through regular expressions
 - generate MDX Queries from existing cube views
-- Analyse Processing Feeders time
-- Maintain dimensions and subsets with python
+- analyse Processing Feeders time
+- maintain dimensions and subsets with python
 - ...
 
 All scripts are split into four categories:
 * **Aministration**: All tasks related to TM1 administration such as sessions, transaction logs...
 * **Data**: Data operation such as getting data out of a view or writing data back to TM1
 * **Metadata**: All operations related to TM1 objects such as creating a new dimension, deleting a view...
-* **Samples**: Groups more advanced scripts such as getting data from web services.
+* **Samples**: Groups more advanced scripts such as getting data from web services
 
 # Requirements
 
@@ -43,13 +43,13 @@ Python scripts can also be run from [TM1 processes](https://code.cubewise.com/tm
 If you are not familiar with the Python programming language you might want to look into some basic tutorials,
 before starting with TM1py.
 thenewboston offers awesome (and free) Python tutorials on his Youtube Channel
-https://www.youtube.com/playlist?list=PL6gx4Cwl9DGAcbMi1sH6oAMk4JHw91mC_
+https://www.youtube.com/watch?v=HBxCHonP6Ro
 
 ## IDE
 
 PyCharm is likely the best IDE for Python. It offers intelligent code completion, on-the-fly error checking and heaps of other features.
 It allows you to save time and be more productive.
-IntelliJ offers a free Community Edition of PyCharm
+JetBrains offers a free Community Edition of PyCharm
 https://www.jetbrains.com/pycharm/
 
 
@@ -59,4 +59,4 @@ If you find issues, sign up in Github and open an Issue in this repository
 
 # Contribution
 
-If you wrote cool sample scripts with TM1py, that might be useful for others, feel free to push them to the repository
+If you wrote cool sample scripts with TM1py, that might be useful for others, feel free to push them to this repository
