@@ -3,10 +3,11 @@ Remove all Views and Subsets in TM1 that match a list of regular expressions.
 use with care!
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
 import re
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 from TM1py.Services import TM1Service
 

@@ -11,7 +11,7 @@ import configparser
 from TM1py.Services import TM1Service
 
 config = configparser.ConfigParser()
-config.read('..\config.ini')
+config.read(r'..\config.ini')
 
 with TM1Service(**config['tm1srv02']) as tm1:
     current_default_member = tm1.dimensions.hierarchies.get_default_member(

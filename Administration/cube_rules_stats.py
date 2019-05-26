@@ -2,11 +2,11 @@
 Read rules from all cubes and sort cubes by some metrics (Number rows, Number feeders,... )
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
 from TM1py.Services import TM1Service
 
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 # Connect to TM1
 with TM1Service(**config['tm1srv01']) as tm1:

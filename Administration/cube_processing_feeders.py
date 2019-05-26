@@ -3,13 +3,14 @@ Regenerate feeders for all cubes.
 Read the time it took from the MessageLog and print it out
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
-
 import time as t
 from datetime import date, time, datetime
 
 from TM1py.Services import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
+
 
 # Time magic with python
 def get_time_from_tm1_timestamp(tm1_timestamp):
@@ -21,6 +22,7 @@ def get_time_from_tm1_timestamp(tm1_timestamp):
     minute = f(tm1_timestamp[14:16])
     second = f(tm1_timestamp[17:19])
     return datetime.combine(date(year, month, day), time(hour, minute, second))
+
 
 # Connect to TM1
 with TM1Service(**config['tm1srv01']) as tm1:
@@ -49,5 +51,5 @@ with TM1Service(**config['tm1srv01']) as tm1:
             # Calculate Delta
             start = get_time_from_tm1_timestamp(starttime_processing)
             end = get_time_from_tm1_timestamp(endtime_processing)
-            delta = end-start
+            delta = end - start
             print("Cube: {} | Time for processing Feeders: {}".format(cube.name, delta))

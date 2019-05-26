@@ -8,29 +8,29 @@ Prerequisites:
 3. Add pandas_reader module:
     To install it, run in command line: pip install pandas_datareader
 """
-import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
-
 import collections
+import configparser
 from datetime import datetime
+
 # type 'pip install pandas_datareader' into cmd if you don't have pandas_datareader installed
 import pandas_datareader.data as web
-
 from TM1py.Services import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 cube_name = 'TM1py FX Rates Monthly'
 currency_pairs = {
-            'EXUSAL': {'From': 'USD', 'To': 'AUD', 'Invert': 'N'},
-            'EXUSUK': {'From': 'USD', 'To': 'GBP', 'Invert': 'N'},
-            'EXUSEU': {'From': 'USD', 'To': 'EUR', 'Invert': 'N'},
-            'EXHKUS': {'From': 'USD', 'To': 'HKD', 'Invert': 'Y'},
-            'EXSIUS': {'From': 'USD', 'To': 'SGD', 'Invert': 'Y'},
-            'EXSZUS': {'From': 'USD', 'To': 'CHF', 'Invert': 'Y'},
-            'EXCHUS': {'From': 'USD', 'To': 'RMB', 'Invert': 'Y'},
-            'EXTAUS': {'From': 'USD', 'To': 'TWD', 'Invert': 'Y'},
-            'EXINUS': {'From': 'USD', 'To': 'INR', 'Invert': 'Y'},
-            'EXJPUS': {'From': 'USD', 'To': 'JPY', 'Invert': 'Y'}
+    'EXUSAL': {'From': 'USD', 'To': 'AUD', 'Invert': 'N'},
+    'EXUSUK': {'From': 'USD', 'To': 'GBP', 'Invert': 'N'},
+    'EXUSEU': {'From': 'USD', 'To': 'EUR', 'Invert': 'N'},
+    'EXHKUS': {'From': 'USD', 'To': 'HKD', 'Invert': 'Y'},
+    'EXSIUS': {'From': 'USD', 'To': 'SGD', 'Invert': 'Y'},
+    'EXSZUS': {'From': 'USD', 'To': 'CHF', 'Invert': 'Y'},
+    'EXCHUS': {'From': 'USD', 'To': 'RMB', 'Invert': 'Y'},
+    'EXTAUS': {'From': 'USD', 'To': 'TWD', 'Invert': 'Y'},
+    'EXINUS': {'From': 'USD', 'To': 'INR', 'Invert': 'Y'},
+    'EXJPUS': {'From': 'USD', 'To': 'JPY', 'Invert': 'Y'}
 }
 
 for currency_ticker, currency_details in currency_pairs.items():

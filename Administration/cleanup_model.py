@@ -3,16 +3,14 @@ Remove all objects in TM1 that match a list of regular expressions.
 use with care!
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
-
 import re
 
 from TM1py.Services import TM1Service
 
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 with TM1Service(**config['tm1srv01']) as tm1:
-
     # Regular expression for everything that starts with 'temp_', 'test' or 'TM1py'
     regex_list = ['^temp_*', '^test*', '^TM1py*']
 
@@ -62,4 +60,3 @@ with TM1Service(**config['tm1srv01']) as tm1:
         for regex in regex_list:
             if re.match(regex, process, re.IGNORECASE):
                 tm1.processes.delete(process)
-

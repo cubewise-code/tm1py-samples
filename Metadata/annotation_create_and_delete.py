@@ -4,13 +4,13 @@
 - Delete the annotation that was created
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
-
 import uuid
 
-from TM1py.Services import TM1Service
 from TM1py.Objects import Annotation
+from TM1py.Services import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 # connection to TM1 Server
 tm1 = TM1Service(**config['tm1srv01'])

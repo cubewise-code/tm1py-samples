@@ -2,10 +2,11 @@
 Get a chore from TM1
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
 from TM1py.Services import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 # Connection to TM1 Server
 with TM1Service(**config['tm1srv01']) as tm1:
@@ -15,5 +16,3 @@ with TM1Service(**config['tm1srv01']) as tm1:
     # Print out the tasks
     for task in c.tasks:
         print("Process: {} Parameters: {}".format(task, task.parameters))
-
-

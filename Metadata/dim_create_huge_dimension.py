@@ -1,13 +1,16 @@
 """
-Create a new dimension TM1py Big dimension with 100,000 elements
+Create a new dimension TM1py Big dimension with 100,000 elements and some consolidations
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
-from TM1py.Services import TM1Service
 from TM1py.Objects import Dimension, Hierarchy, Element
+from TM1py.Services import TM1Service
 from TM1py.Utils import Utils
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
+
+DIMENSION_NAME = "TM1py Big Dimension"
 
 # Establish connection to TM1 Server
 with TM1Service(**config['tm1srv01']) as tm1:
@@ -35,8 +38,8 @@ with TM1Service(**config['tm1srv01']) as tm1:
         parent_child = ('3 Digit', 'Element {}'.format(i))
         edges[parent_child] = 1
 
-    hierarchy = Hierarchy('TM1py Big Dimension', 'TM1py Big Dimension', elements, edges=edges)
-    dimension = Dimension('TM1py Big Dimension', [hierarchy])
+    hierarchy = Hierarchy(name=DIMENSION_NAME, dimension_name=DIMENSION_NAME, elements=elements, edges=edges)
+    dimension = Dimension(name=DIMENSION_NAME, hierarchies=[hierarchy])
 
     # Send everything to TM1
     tm1.dimensions.create(dimension)

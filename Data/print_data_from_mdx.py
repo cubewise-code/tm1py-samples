@@ -3,11 +3,11 @@ Query data through MDX
 
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
 from TM1py.Services import TM1Service
 
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 with TM1Service(**config['tm1srv01']) as tm1:
     # Define mdx query
@@ -21,6 +21,3 @@ with TM1Service(**config['tm1srv01']) as tm1:
 
     # Print content
     print(dict(content))
-
-
-

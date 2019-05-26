@@ -4,13 +4,11 @@ For each cube calculate the number of potential cells.
 """
 
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
-
-import json
 
 from TM1py.Services import TM1Service
 
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 with TM1Service(**config['tm1srv01']) as tm1:
     # New List to store the cube - number mapping

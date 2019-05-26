@@ -2,8 +2,8 @@
 Query a default TM1 "Planning Sample" server and show results in different formats
 """
 
-import pprint
 import configparser
+import pprint
 
 from TM1py.Services import TM1Service
 from TM1py.Utils import Utils
@@ -17,7 +17,6 @@ pp = pprint.PrettyPrinter(indent=2)
 
 # Connect to TM1
 with TM1Service(**config['tm1srv01']) as tm1:
-
     def query_formats(
             mdx,
             cell_properties=None,
@@ -25,7 +24,6 @@ with TM1Service(**config['tm1srv01']) as tm1:
             member_properties=None,
             value_precision=None,
             top=None):
-
         print("Query:")
         print(mdx)
 
@@ -41,7 +39,7 @@ with TM1Service(**config['tm1srv01']) as tm1:
 
         # default: (Case and space insensitive) dictionary
         print("\nDefault: (Case and space insensitive) dictionary")
-        data = tm1.cubes.cells.execute_mdx(mdx,cell_properties=cell_properties)
+        data = tm1.cubes.cells.execute_mdx(mdx, cell_properties=cell_properties)
         print(data)
         # Note: can be converted into pandas dataframe with Utility function:
         print("\nCoverted to dataframe")
@@ -67,7 +65,7 @@ with TM1Service(**config['tm1srv01']) as tm1:
         # array
         print("\nArray: for grids and charts")
         array = tm1.cubes.cells.execute_mdx_ui_array(
-            mdx=mdx, 
+            mdx=mdx,
             value_precision=value_precision,
             elem_properties=elem_properties,
             member_properties=member_properties)
@@ -76,11 +74,12 @@ with TM1Service(**config['tm1srv01']) as tm1:
         # dygraph
         print("\nDygraph: for charts that want columns of data, instead of rows")
         dygraph = tm1.cubes.cells.execute_mdx_ui_dygraph(
-            mdx=mdx, 
+            mdx=mdx,
             value_precision=value_precision,
             elem_properties=elem_properties,
             member_properties=member_properties)
         pp.pprint(dygraph)
+
 
     # Sample query from TM1 sample server called "Planning Sample"
     mdx = """
@@ -140,8 +139,8 @@ with TM1Service(**config['tm1srv01']) as tm1:
     #     """
 
     query_formats(
-            mdx=mdx,
-            cell_properties=["Value", "FormattedValue", "RuleDerived"],
-            elem_properties=None,  # ["Name","Type","Index"],
-            member_properties=["Name"],  # ,"UniqueName","Attributes"],
-            top=None)
+        mdx=mdx,
+        cell_properties=["Value", "FormattedValue", "RuleDerived"],
+        elem_properties=None,  # ["Name","Type","Index"],
+        member_properties=["Name"],  # ,"UniqueName","Attributes"],
+        top=None)

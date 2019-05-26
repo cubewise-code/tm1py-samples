@@ -1,8 +1,9 @@
+import configparser
+
 from TM1py import TM1Service, NativeView, AnonymousSubset
 
-import configparser
 config = configparser.ConfigParser()
-config.read('..\config.ini')
+config.read(r'..\config.ini')
 
 mdx = """
 SELECT

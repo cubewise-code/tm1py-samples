@@ -2,10 +2,11 @@
 Create a new file out.xlsx from a TM1 application file.
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
 from TM1py import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 with TM1Service(**config['tm1srv01']) as tm1:
     # path in TM1 Application-Tree

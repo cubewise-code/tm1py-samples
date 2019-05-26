@@ -2,10 +2,11 @@
 Get a Process from TM1. Update it. Push it back to TM1.
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
 from TM1py.Services import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 # connection to TM1 Server
 with TM1Service(**config['tm1srv01']) as tm1:
@@ -20,4 +21,3 @@ with TM1Service(**config['tm1srv01']) as tm1:
 
     # update
     tm1.processes.update(p)
-

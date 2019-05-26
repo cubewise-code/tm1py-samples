@@ -2,11 +2,12 @@
 Create a TI process in TM1
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
 from TM1py.Objects import Process
 from TM1py.Services import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 # connection to TM1 Server
 with TM1Service(**config['tm1srv01']) as tm1:

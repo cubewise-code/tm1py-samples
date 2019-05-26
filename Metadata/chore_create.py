@@ -4,9 +4,6 @@ Create a Chore.
 Assumption: Process 'import actuals' exists in TM1 model and has a parameter 'pRegion'
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
-
 import uuid
 from datetime import datetime
 
@@ -14,6 +11,9 @@ from TM1py.Objects import Chore, ChoreStartTime
 from TM1py.Objects import ChoreFrequency
 from TM1py.Objects import ChoreTask
 from TM1py.Services import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 # connection to TM1 Server
 with TM1Service(**config['tm1srv01']) as tm1:

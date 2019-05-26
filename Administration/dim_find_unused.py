@@ -2,10 +2,11 @@
 Find all dimensions, that are not used in cubes
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
 from TM1py.Services import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 # Connect to TM1
 with TM1Service(**config['tm1srv01']) as tm1:
@@ -21,4 +22,3 @@ with TM1Service(**config['tm1srv01']) as tm1:
     unused_dimensions = set(all_dimensions) - used_dimensions
 
     print(unused_dimensions)
-

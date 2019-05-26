@@ -3,7 +3,7 @@ Run loose statements of TI
 """
 import configparser
 config = configparser.ConfigParser()
-config.read('..\config.ini')
+config.read(r'..\config.ini')
 
 from TM1py.Services import TM1Service
 
