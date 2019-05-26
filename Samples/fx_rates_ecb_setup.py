@@ -11,7 +11,7 @@ from TM1py.Objects import Cube, Dimension, Hierarchy, Element
 from TM1py.Services import TM1Service
 
 config = configparser.ConfigParser()
-config.read('..\config.ini')
+config.read(r'..\config.ini')
 
 
 # Time magic with python generator

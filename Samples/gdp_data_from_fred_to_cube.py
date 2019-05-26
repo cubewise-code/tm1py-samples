@@ -8,13 +8,14 @@ Assumption:
 
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
+import math
 # type 'pip install quandl' into cmd if you don't have quandl installed
 import quandl
-import math
 from TM1py.Services import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 data_raw = quandl.get("FRED/GDP")
 data = data_raw.ix["1990-01-01":"2017-12-31"]
@@ -24,12 +25,10 @@ cellset = {}
 for tmstp, row_data in data.iterrows():
     # time mapping: YYYY-MM-DD to YYYY and QQ
     year = tmstp.year
-    quarter = 'Q' + str(math.ceil(tmstp.month/3.))
+    quarter = 'Q' + str(math.ceil(tmstp.month / 3.))
     coordinates = ('USA', year, quarter, 'GDP')
     value = row_data.values[0]
     cellset[coordinates] = value
 
 with TM1Service(**config['tm1srv01']) as tm1:
     tm1.cubes.cells.write_values('TM1py Econ', cellset)
-
-

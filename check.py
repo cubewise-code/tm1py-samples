@@ -4,6 +4,7 @@ This script can be used to check if TM1py can connect to your TM1 instance
 
 import getpass
 from distutils.util import strtobool
+
 from TM1py.Services import TM1Service
 
 # Parameters for connection

@@ -3,17 +3,15 @@ Get a dimension. Update it and push it back to TM1.
 
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
-
 import uuid
 
 from TM1py.Services import TM1Service
 
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 # Connection to TM1. Needs Address, Port, Credentials, and SSL
 with TM1Service(**config['tm1srv01']) as tm1:
-
     # get dimension
     dimension = tm1.dimensions.get('plan_department')
 

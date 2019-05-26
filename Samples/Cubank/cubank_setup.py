@@ -408,7 +408,7 @@ if __name__ == "__main__":
     start = time.time()
 
     config = configparser.ConfigParser()
-    config.read(r'..\config.ini')
+    config.read(r'..\..\config.ini')
     loans = read_loans_from_file(path="cubank_loans.csv")
 
     with TM1Service(**config['tm1srv01']) as tm1:

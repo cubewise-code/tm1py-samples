@@ -11,7 +11,7 @@ import configparser
 from TM1py.Services import TM1Service
 
 config = configparser.ConfigParser()
-config.read('..\config.ini')
+config.read(r'..\config.ini')
 
 with TM1Service(**config['tm1srv02']) as tm1:
     new_default_member = "2019-01-01"

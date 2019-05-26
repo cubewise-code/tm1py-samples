@@ -2,15 +2,15 @@
 Get Chore form TM1. Update it. Push it back to TM1.
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
 from TM1py.Objects import ChoreFrequency
 from TM1py.Services import TM1Service
 
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
+
 # Connection to TM1 Server
 with TM1Service(**config['tm1srv01']) as tm1:
-
     # Read chore:
     c = tm1.chores.get('real chore')
 
@@ -22,5 +22,3 @@ with TM1Service(**config['tm1srv01']) as tm1:
 
     # Update the TM1 chore
     tm1.chores.update(c)
-
-

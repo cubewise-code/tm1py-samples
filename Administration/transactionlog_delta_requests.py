@@ -1,18 +1,16 @@
-
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
-
-
 import time
+
 from TM1py import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 cube_source = "Retail"
 cube_target = "Retail"
 
 # Establish connection to TM1 Source
 with TM1Service(**config['tm1srv01']) as tm1_source:
-
     # Start Change Tracking
     tm1_source.server.initialize_transaction_log_delta_requests("Cube eq '" + cube_source + "'")
 

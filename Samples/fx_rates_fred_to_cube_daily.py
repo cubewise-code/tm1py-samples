@@ -11,14 +11,14 @@ Prerequisites:
 
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
-
 from datetime import datetime
+
 # type 'pip install pandas_datareader' into cmd if you don't have pandas_datareader installed
 import pandas_datareader.data as web
-
 from TM1py.Services import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 # FX Cube Name
 cube_name = 'TM1py FX Rates'
@@ -26,16 +26,16 @@ cube_name = 'TM1py FX Rates'
 # FRED Tickers with properties
 # https://fred.stlouisfed.org/series/DEXUSEU
 currency_pairs = {
-            'DEXUSAL': {'From': 'USD', 'To': 'AUD', 'Invert': 'N'},
-            'DEXUSUK': {'From': 'USD', 'To': 'GBP', 'Invert': 'Y'},
-            'DEXUSEU': {'From': 'USD', 'To': 'EUR', 'Invert': 'Y'},
-            'DEXHKUS': {'From': 'USD', 'To': 'HKD', 'Invert': 'N'},
-            'DEXSIUS': {'From': 'USD', 'To': 'SGD', 'Invert': 'N'},
-            'DEXSZUS': {'From': 'USD', 'To': 'CHF', 'Invert': 'N'},
-            'DEXCHUS': {'From': 'USD', 'To': 'RMB', 'Invert': 'N'},
-            'DEXTAUS': {'From': 'USD', 'To': 'TWD', 'Invert': 'N'},
-            'DEXINUS': {'From': 'USD', 'To': 'INR', 'Invert': 'N'},
-            'DEXJPUS': {'From': 'USD', 'To': 'JPY', 'Invert': 'N'}
+    'DEXUSAL': {'From': 'USD', 'To': 'AUD', 'Invert': 'N'},
+    'DEXUSUK': {'From': 'USD', 'To': 'GBP', 'Invert': 'Y'},
+    'DEXUSEU': {'From': 'USD', 'To': 'EUR', 'Invert': 'Y'},
+    'DEXHKUS': {'From': 'USD', 'To': 'HKD', 'Invert': 'N'},
+    'DEXSIUS': {'From': 'USD', 'To': 'SGD', 'Invert': 'N'},
+    'DEXSZUS': {'From': 'USD', 'To': 'CHF', 'Invert': 'N'},
+    'DEXCHUS': {'From': 'USD', 'To': 'RMB', 'Invert': 'N'},
+    'DEXTAUS': {'From': 'USD', 'To': 'TWD', 'Invert': 'N'},
+    'DEXINUS': {'From': 'USD', 'To': 'INR', 'Invert': 'N'},
+    'DEXJPUS': {'From': 'USD', 'To': 'JPY', 'Invert': 'N'}
 }
 
 # Container to store data that we write to TM1 in the end (in one batch)
@@ -62,5 +62,3 @@ for currency_ticker, currency_details in currency_pairs.items():
 
 with TM1Service(**config['tm1srv01']) as tm1:
     tm1.cubes.cells.write_values(cube_name, cellset)
-
-

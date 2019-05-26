@@ -10,11 +10,13 @@ Prerequisites:
     type 'pip install quandl' into cmd if you don't have quandl installed
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
+
 # type 'pip install quandl' into cmd if you don't have quandl installed
 import quandl
 from TM1py.Services import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 # load Stock data for IBM
 data = quandl.get("WIKI/IBM", start_date='2015-01-01', end_date='2017-08-11')
@@ -31,4 +33,3 @@ for tmstp, row in data.iterrows():
 # push data to TM1
 with TM1Service(**config['tm1srv01']) as tm1:
     tm1.cubes.cells.write_values(cube, cellset)
-

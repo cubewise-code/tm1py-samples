@@ -2,10 +2,11 @@
 Query a Process from the TM1 model
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
 from TM1py.Services import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 # connection to TM1 Server
 with TM1Service(**config['tm1srv01']) as tm1:
@@ -19,4 +20,3 @@ with TM1Service(**config['tm1srv01']) as tm1:
     print('Metadata: \r\n' + str(p.metadata_procedure))
     print('Data: \r\n' + str(p.data_procedure))
     print('Epilog: \r\n' + str(p.epilog_procedure))
-

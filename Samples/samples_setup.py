@@ -7,13 +7,14 @@ Create all cubes and dimensions thar are required for the Load Data Samples:
 
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
+from datetime import timedelta, date
 
 from TM1py.Objects import Cube, Dimension, Hierarchy, Element
 from TM1py.Services import TM1Service
 
-from datetime import timedelta, date
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
+
 
 # Time magic with python generator
 def daterange(start_date, end_date):
@@ -23,7 +24,6 @@ def daterange(start_date, end_date):
 
 # push data to TM1
 with TM1Service(**config['tm1srv01']) as tm1:
-
     # ============================
     # create TM1 objects for fx rates sample
     currencies = ('RMB', 'EUR', 'JPY', 'CHF', 'USD', 'AUD', 'TWD', 'HKD', 'GBP', 'SGD', 'INR')
@@ -83,7 +83,7 @@ with TM1Service(**config['tm1srv01']) as tm1:
     if not tm1.cubes.exists(cube.name):
         tm1.cubes.create(cube)
 
-    #============================
+    # ============================
     # create TM1 objects for gdp sample
 
     # create dimension TM1py Country
@@ -113,7 +113,7 @@ with TM1Service(**config['tm1srv01']) as tm1:
     if not tm1.cubes.exists(cube.name):
         tm1.cubes.create(cube)
 
-    #============================
+    # ============================
     # create TM1 objects for stock sample
 
     # create dimension TM1py Financial Instrument

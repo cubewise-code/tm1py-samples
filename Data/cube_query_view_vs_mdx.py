@@ -5,15 +5,14 @@ Measure time to see which way is faster.
 Assumption: Cube 'Plan_BudgetPlan' has a view called 'PerformanceTest'
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
-
 import time
 
 from TM1py.Services import TM1Service
 
-with TM1Service(**config['tm1srv01']) as tm1:
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
+with TM1Service(**config['tm1srv01']) as tm1:
     cube_name = 'General Ledger'
     view_name = 'Default'
 
@@ -39,9 +38,7 @@ with TM1Service(**config['tm1srv01']) as tm1:
         run_time = time.time() - start_time
         runtimes_mdx.append(run_time)
 
-    print("View: " + str(sum(runtimes_view)/len(runtimes_view)))
+    print("View: " + str(sum(runtimes_view) / len(runtimes_view)))
     print("MDX: " + str(sum(runtimes_mdx) / len(runtimes_mdx)))
 
     print('Data is the same, right? {}'.format(a == b))
-
-

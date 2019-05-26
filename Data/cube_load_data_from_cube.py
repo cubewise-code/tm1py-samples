@@ -6,10 +6,11 @@ Assumption: Metadata (Cube and Dimensions) are in sync.
 
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
 from TM1py.Services import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 # Setup Connections
 tm1_source = TM1Service(**config['tm1srv01'])

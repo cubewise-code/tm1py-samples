@@ -4,15 +4,15 @@ Create a classic TM1 cube view
 Assumptions: all referenced subsets exist in TM1 Server. 
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
 from TM1py.Objects import NativeView
 from TM1py.Services import TM1Service
 
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
+
 # establish connection to TM1 Server
 with TM1Service(**config['tm1srv01']) as tm1:
-
     native_view = NativeView(cube_name='Plan_BudgetPlan',
                              view_name='TM1py View3')
 

@@ -2,10 +2,11 @@
 Find all security groups, that are not used
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
 from TM1py.Services import TM1Service
+
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 with TM1Service(**config['tm1srv01']) as tm1:
     # Get all groups

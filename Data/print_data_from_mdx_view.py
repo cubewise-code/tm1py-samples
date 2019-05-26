@@ -4,14 +4,13 @@ Create MDX View on }ClientGroups cube and query data through it.
 IMPORTANT: MDX Views can not be seen through Architect/Perspectives.
 """
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
-
 import uuid
 
 from TM1py.Objects import MDXView
 from TM1py.Services import TM1Service
 
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 with TM1Service(**config['tm1srv01']) as tm1:
     # Random text
@@ -32,6 +31,3 @@ with TM1Service(**config['tm1srv01']) as tm1:
 
     # Print content
     print(content)
-
-
-

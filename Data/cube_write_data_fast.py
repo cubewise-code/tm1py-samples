@@ -5,20 +5,19 @@ Script creates cube and dimensions by default if they don't exist yet.
 Play around with the number of working threads to find the optimal setup for your system!
 
 """
-import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
-
 import asyncio
+import configparser
 import time
 from concurrent.futures import ThreadPoolExecutor
 
 from TM1py.Objects import Cube, Dimension, Element, Hierarchy
 from TM1py.Services import TM1Service
 
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 # MDX Template
-mdx_template = "SELECT " \
+MDX_TEMPLATE = "SELECT " \
                "{{ SUBSET ([Big Dimension].Members, {}, {} ) }} on ROWS, " \
                "{{ [Python Cube Measure].[Numeric Element] }} on COLUMNS " \
                "FROM [Python Cube]"
@@ -59,27 +58,28 @@ async def main():
     with TM1Service(address='localhost', port=12354, user='admin', password='apple', ssl=True) as tm1:
         with ThreadPoolExecutor(max_workers=10) as executor:
             futures = [loop.run_in_executor(executor, write_values, tm1,
-                                            mdx_template.format(0, 9999), range(0, 9999)),
+                                            MDX_TEMPLATE.format(0, 9999), range(0, 9999)),
                        loop.run_in_executor(executor, write_values, tm1,
-                                            mdx_template.format(9999, 19999), range(9999, 19999)),
+                                            MDX_TEMPLATE.format(9999, 19999), range(9999, 19999)),
                        loop.run_in_executor(executor, write_values, tm1,
-                                            mdx_template.format(19999, 39999), range(19999, 29999)),
+                                            MDX_TEMPLATE.format(19999, 39999), range(19999, 29999)),
                        loop.run_in_executor(executor, write_values, tm1,
-                                            mdx_template.format(29999, 49999), range(29999, 39999)),
+                                            MDX_TEMPLATE.format(29999, 49999), range(29999, 39999)),
                        loop.run_in_executor(executor, write_values, tm1,
-                                            mdx_template.format(39999, 59999), range(39999, 49999)),
+                                            MDX_TEMPLATE.format(39999, 59999), range(39999, 49999)),
                        loop.run_in_executor(executor, write_values, tm1,
-                                            mdx_template.format(49999, 69999), range(49999, 59999)),
+                                            MDX_TEMPLATE.format(49999, 69999), range(49999, 59999)),
                        loop.run_in_executor(executor, write_values, tm1,
-                                            mdx_template.format(59999, 79999), range(59999, 69999)),
+                                            MDX_TEMPLATE.format(59999, 79999), range(59999, 69999)),
                        loop.run_in_executor(executor, write_values, tm1,
-                                            mdx_template.format(69999, 89999), range(69999, 79999)),
+                                            MDX_TEMPLATE.format(69999, 89999), range(69999, 79999)),
                        loop.run_in_executor(executor, write_values, tm1,
-                                            mdx_template.format(79999, 99999), range(79999, 89999)),
+                                            MDX_TEMPLATE.format(79999, 99999), range(79999, 89999)),
                        loop.run_in_executor(executor, write_values, tm1,
-                                            mdx_template.format(89999, 99999), range(89999, 99999))]
+                                            MDX_TEMPLATE.format(89999, 99999), range(89999, 99999))]
             for future in futures:
                 await future
+
 
 # Create everything if needed
 create_dimensions_and_cube()

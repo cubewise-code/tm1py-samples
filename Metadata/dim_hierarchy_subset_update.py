@@ -11,7 +11,7 @@ from TM1py.Objects import Subset
 from TM1py.Services import TM1Service
 
 config = configparser.ConfigParser()
-config.read('..\config.ini')
+config.read(r'..\config.ini')
 
 with TM1Service(**config['tm1srv01']) as tm1:
     # get a random string that we can use a subset name

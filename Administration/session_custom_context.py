@@ -8,7 +8,7 @@ import configparser
 from TM1py.Services import TM1Service
 
 config = configparser.ConfigParser()
-config.read('..\config.ini')
+config.read(r'..\config.ini')
 
 APP_NAME = "My TM1py Application"
 

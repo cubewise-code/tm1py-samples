@@ -1,23 +1,14 @@
+import configparser
 from datetime import date, timedelta
-import dateutil.parser
-import requests
-import pandas as pd
-import numpy as np
 
+import dateutil.parser
+import numpy as np
+import pandas as pd
+import requests
 from TM1py.Objects import Element, Dimension, Hierarchy, Cube, ElementAttribute, Subset, AnonymousSubset, \
     ViewAxisSelection, ViewTitleSelection, NativeView
 from TM1py.Services import TM1Service
 from TM1py.Utils.Utils import CaseAndSpaceInsensitiveTuplesDict
-
-
-# Connection Parameters for TM1 Instance
-TM1_PARAMETERS = {
-    "address": 'localhost',
-    "port": "8009",
-    "user": "admin",
-    "password": "",
-    "ssl": True
-}
 
 
 def build_date_dimension(tm1, dimension_name, first_date, last_date, overwrite):
@@ -125,7 +116,7 @@ def build_cube(tm1, name, dimensions, rules=None, overwrite=False):
 
 def load_data_chicago(tm1, cube_name):
     cellset = dict()
-    with open("chicago.csv", "r") as file:
+    with open("cubike_chicago.csv", "r") as file:
         for line_raw in file.readlines()[1:]:
             line = line_raw.split(',')
             cellset[('Actual', str(line[0]), 'Chicago', 'Count')] = line[1]
@@ -134,28 +125,9 @@ def load_data_chicago(tm1, cube_name):
     tm1.cubes.cells.write_values(cube_name, cellset)
 
 
-def load_data_chicago_raw(tm1, cube_name):
-    df = pd.read_csv("Chicago_raw.csv")
-    # data munging
-    df.drop(columns=["trip_id", "stoptime", "bikeid", "from_station_id", "from_station_name",
-                     "to_station_id", "to_station_name", "usertype", "gender", "birthyear"], inplace=True)
-    df["count"] = 1
-    df['starttime'] = df['starttime'].str.split(' ').str[0]
-    df = df.groupby(['starttime']).sum()
-
-    # prepare data for TM1
-    cellset = dict()
-    for row in df.iterrows():
-        cellset[('Actual', str(row[0]), 'Chicago', 'Count')] = row[1]["count"]
-        cellset[('Actual', str(row[0]), 'Chicago', 'Seconds')] = row[1]["tripduration"]
-
-    # send to TM1
-    tm1.cubes.cells.write_values(cube_name, cellset)
-
-
 def load_data_nyc(tm1, cube_name):
     cellset = dict()
-    with open("nyc.csv", "r") as file:
+    with open("cubike_nyc.csv", "r") as file:
         for line_raw in file.readlines()[1:]:
             line = line_raw.split(',')
             cellset[('Actual', str(line[0]), 'NYC', 'Count')] = line[1]
@@ -163,55 +135,14 @@ def load_data_nyc(tm1, cube_name):
     # Send to TM1
     tm1.cubes.cells.write_values(cube_name, cellset)
 
-def load_data_nyc_raw(tm1, cube_name):
-    df = pd.read_csv(r"nyc_raw.csv",
-                     usecols=[0, 1],
-                     dtype={0: np.int32, 1: str})
-    # Data Munging
-    df["count"] = 1
-    df.columns = ['tripduration', 'starttime', 'count']
-    df['starttime'] = df['starttime'].str.split(' ').str[0]
-    df = df.groupby(['starttime']).sum()
-
-    # Prepare data for TM1
-    cellset = dict()
-    for row in df.iterrows():
-        cellset[('Actual', str(row[0]), 'NYC', 'Count')] = row[1]["count"]
-        cellset[('Actual', str(row[0]), 'NYC', 'Seconds')] = row[1]["tripduration"]
-    # Send to TM1
-    tm1.cubes.cells.write_values(cube_name, cellset)
-
 
 def load_data_washington_dc(tm1, cube_name):
     cellset = dict()
-    with open("washington_dc.csv", "r") as file:
+    with open("cubike_washington_dc.csv", "r") as file:
         for line_raw in file.readlines()[1:]:
             line = line_raw.split(',')
             cellset[('Actual', str(line[0]), 'Washington', 'Count')] = line[1]
             cellset[('Actual', str(line[0]), 'Washington', 'Seconds')] = line[2]
-    # Send to TM1
-    tm1.cubes.cells.write_values(cube_name, cellset)
-
-
-def load_data_washington_dc_raw(tm1, cube_name):
-    cellset = dict()
-
-    for year in ('2014', '2015', '2016', '2017'):
-        for quarter in ('Q1', 'Q2', 'Q3', 'Q4'):
-            df = pd.read_csv(r"data_washington_dc_raw/" + year + "/" + year + quarter + ".csv",
-                             usecols=[0, 1],
-                             dtype={0: np.int32, 1: str})
-            # Data Munging
-            df["count"] = 1
-            df.columns = ['tripduration', 'starttime', 'count']
-            df['starttime'] = df['starttime'].str.split(' ').str[0]
-            df = df.groupby(['starttime']).sum()
-
-            # Prepare data for TM1
-            for row in df.iterrows():
-                cellset[('Actual', str(row[0]), 'Washington', 'Count')] = row[1]["count"]
-                cellset[('Actual', str(row[0]), 'Washington', 'Seconds')] = row[1]["tripduration"]
-
     # Send to TM1
     tm1.cubes.cells.write_values(cube_name, cellset)
 
@@ -265,7 +196,7 @@ def write_public_holidays_to_cube(tm1, cube_name):
     city_hierarchy = tm1.dimensions.hierarchies.get("city", "city")
     cities = [element.name for element in city_hierarchy if element.element_type != 'Consolidated']
     cellset = dict()
-    with open("public holidays.csv", "r") as file:
+    with open("cubike_public_holidays.csv", "r") as file:
         for row in file:
             _, date, name = row.split(',')
             for city in cities:
@@ -423,5 +354,8 @@ def main(tm1):
 
 
 if __name__ == "__main__":
-    with TM1Service(**TM1_PARAMETERS) as tm1:
+    config = configparser.ConfigParser()
+    config.read(r'..\..\config.ini')
+
+    with TM1Service(**config['tm1srv01']) as tm1:
         main(tm1)

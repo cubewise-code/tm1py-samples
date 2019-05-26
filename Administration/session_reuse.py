@@ -7,7 +7,7 @@ import configparser
 
 
 config = configparser.ConfigParser()
-config.read('..\config.ini')
+config.read(r'..\config.ini')
 
 
 # instantiate session

@@ -1,10 +1,10 @@
 import configparser
-config = configparser.ConfigParser()
-config.read('..\config.ini')
 
 from TM1py.Objects import Dimension, Element, ElementAttribute, Hierarchy
 from TM1py.Services import TM1Service
 
+config = configparser.ConfigParser()
+config.read(r'..\config.ini')
 
 name = 'TM1py Region'
 
@@ -35,5 +35,3 @@ with TM1Service(**config['tm1srv01']) as tm1:
 
     # create dimension in TM1 !
     tm1.dimensions.create(d)
-
-
