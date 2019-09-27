@@ -23,17 +23,16 @@ if len(gateway.strip()) == 0:
     gateway = None
 
 try:
-  with TM1Service(
-        address=address,
-        port=port,
-        user=user,
-        password=password,
-        namespace=namespace,
-        gateway=gateway,
-        ssl=ssl) as tm1:
-    server_name = tm1.server.get_server_name()
-    print("Connection to TM1 established!! your Servername is: {}".format(server_name))
+    with TM1Service(
+            address=address,
+            port=port,
+            user=user,
+            password=password,
+            namespace=namespace,
+            gateway=gateway,
+            ssl=ssl) as tm1:
+        server_name = tm1.server.get_server_name()
+        print("Connection to TM1 established!! your Servername is: {}".format(server_name))
 except Exception as e:
-  print("\nERROR:")
-  print("\t" + str(e))
-
+    print("\nERROR:")
+    print("\t" + str(e))
