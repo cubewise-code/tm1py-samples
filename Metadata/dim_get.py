@@ -7,6 +7,9 @@ import random
 from TM1py.Services import TM1Service
 
 config = configparser.ConfigParser()
+#It is recommended to to store the password in windows credential manager instead of the config file\n# storing the credentials in a file is not recommended for purposes other than testing.
+# it's better to setup CAM with SSO or use keyring to store credentials in the windows credential manager. Sample:
+# Samples/credentials_best_practice.py
 config.read(r'..\config.ini')
 
 # Connection to TM1. Needs Address, Port, Credentials, and SSL
