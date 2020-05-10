@@ -4,6 +4,9 @@ import time
 from TM1py import TM1Service
 
 config = configparser.ConfigParser()
+# storing the credentials in a file is not recommended for purposes other than testing.
+# it's better to setup CAM with SSO or use keyring to store credentials in the windows credential manager. Sample:
+# Samples/credentials_best_practice.py
 config.read(r'..\config.ini')
 
 cube_source = "Retail"
