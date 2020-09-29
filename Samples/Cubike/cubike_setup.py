@@ -194,7 +194,7 @@ def load_weather_data(tm1, station_city_mapping, weather_cube_name):
 
 def write_public_holidays_to_cube(tm1, cube_name):
     city_hierarchy = tm1.dimensions.hierarchies.get("city", "city")
-    cities = [element.name for element in city_hierarchy if element.element_type != 'Consolidated']
+    cities = [element.name for element in city_hierarchy if str(element.element_type) != 'Consolidated']
     cellset = dict()
     with open("cubike_public_holidays.csv", "r") as file:
         for row in file:
