@@ -27,11 +27,11 @@ mdx = "SELECT " \
       "WHERE " \
       "([plan_version].[FY 2004 Budget],[plan_business_unit].[10110],[plan_department].[410]," \
       "[plan_exchange_rates].[local],[plan_source].[input])"
-data = tm1_source.data.execute_mdx(mdx)
+data = tm1_source.cells.execute_mdx(mdx)
 # Rearrange data
 values = [cell['Value'] for cell in data.values()]
 # Send data to target TM1 instance
-tm1_target.data.write_values_through_cellset(mdx, values)
+tm1_target.cells.write_values_through_cellset(mdx, values)
 
 # Explicit Logout
 tm1_source.logout()
