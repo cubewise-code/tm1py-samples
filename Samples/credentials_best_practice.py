@@ -20,6 +20,8 @@ if not password:
     password = getpass(f"Please insert password for user '{user}' and instance '{INSTANCE}':")
 keyring.set_password(INSTANCE, user, password)
 
+config[INSTANCE]["password"] = password
+
 with TM1Service(**config[INSTANCE]) as tm1:
     tm1_version = tm1.server.get_product_version()
     print(tm1_version)
