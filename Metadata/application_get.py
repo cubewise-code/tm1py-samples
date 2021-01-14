@@ -4,6 +4,7 @@ Create a new file out.xlsx from a TM1 application file.
 import configparser
 
 from TM1py import TM1Service
+from TM1py.Objects.Application import ApplicationTypes
 
 config = configparser.ConfigParser()
 # storing the credentials in a file is not recommended for purposes other than testing.
@@ -16,7 +17,11 @@ with TM1Service(**config['tm1srv01']) as tm1:
     path = 'Finance/P&L.xlsx'
 
     # get the application
-    application = tm1.applications.get(path)
+    application = tm1.applications.get(
+        path="Planning Sample/Bottom Up Input",
+        application_type=ApplicationTypes.DOCUMENT,
+        name="Budget Input",
+        private=False)
 
     # write it to xlsx file
     application.to_xlsx("out.xlsx")
